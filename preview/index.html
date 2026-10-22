@@ -1,0 +1,1800 @@
+<title>Burma Teak Plant</title>
+
+<!-- Layout: full-bleed cinematic bands alternating paper / deep forest, editorial split grids inside a 96rem shell -->
+<style>
+  :root {
+    /* Palette — descended from Ganesh Nursery's own #12261A theme colour,
+       with their logo teal kept as a restrained accent. */
+    --ink: #07130C;
+    --forest-deep: #0B1A12;
+    --forest: #12261A;
+    --forest-mid: #1D3B29;
+    --forest-soft: #2F5A41;
+    --teak: #A9703F;
+    --teak-dark: #7B4F2A;
+    --teak-light: #C99B6E;
+    --gold: #C9A227;
+    --gold-soft: #E3C76A;
+    --teal: #19A3AD;
+    --sand: #E8DFD1;
+    --bone: #F3EDE3;
+    --paper: #FDFBF7;
+
+    --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+    --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --shell: 96rem;
+    --gutter: clamp(1.25rem, 5vw, 5.5rem);
+    --section: clamp(5rem, 11vw, 11rem);
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+    color-scheme: light;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--forest-deep);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    margin: 0;
+    text-wrap: balance;
+  }
+  p { margin: 0; text-wrap: pretty; }
+  img { max-width: 100%; display: block; }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Layout ---------- */
+  .shell {
+    width: 100%;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+  .section { padding-block: var(--section); }
+
+  /* ---------- Type ---------- */
+  .d-xl { font-size: clamp(2.75rem, 10.5vw, 9rem); line-height: 0.92; letter-spacing: -0.025em; }
+  .d-lg { font-size: clamp(2.25rem, 7.5vw, 6rem); line-height: 0.96; letter-spacing: -0.02em; }
+  .d-md { font-size: clamp(1.875rem, 5.2vw, 4rem); line-height: 1.02; letter-spacing: -0.015em; }
+  .d-sm { font-size: clamp(1.5rem, 3.4vw, 2.5rem); line-height: 1.12; }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.34em;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+  }
+  .eyebrow .rule { height: 1px; width: 3rem; background: currentColor; flex: none; }
+
+  .lede { font-size: clamp(1rem, 1.3vw, 1.1875rem); line-height: 1.75; color: rgb(29 59 41 / 0.85); }
+  .measure { max-width: 34rem; }
+
+  .on-dark { background: var(--forest-deep); color: var(--bone); }
+  /* The footer is dark but is not marked .on-dark, so without this the lede
+     keeps its light-theme colour and renders dark-green on dark green. */
+  .on-dark .lede,
+  .footer .lede { color: rgb(232 223 209 / 0.8); }
+
+  /* Line-mask headline reveal */
+  .line-mask { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .line-mask > span {
+    display: block;
+    transform: translateY(0);
+    transition: transform 1.15s var(--ease);
+  }
+  .js .line-mask > span { transform: translateY(112%); }
+  .js .line-mask.in > span { transform: translateY(0); }
+
+  /* Generic reveal — visible by default, hidden only once JS takes over */
+  .rv { opacity: 1; transform: none; transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+  .js .rv { opacity: 0; transform: translateY(28px); }
+  .js .rv.in { opacity: 1; transform: none; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: 0.65rem;
+    padding: 1.05rem 2rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease);
+    cursor: pointer;
+  }
+  .btn svg { transition: transform 0.5s var(--ease); }
+  .btn:hover svg { transform: translateX(4px); }
+  .btn-gold { background: var(--gold); color: var(--forest-deep); }
+  .btn-gold:hover { background: var(--gold-soft); }
+  .btn-light { border-color: rgb(243 237 227 / 0.4); color: var(--bone); }
+  .btn-light:hover { background: var(--bone); color: var(--forest-deep); border-color: var(--bone); }
+  .btn-outline { border-color: rgb(18 38 26 / 0.3); color: var(--forest); }
+  .btn-outline:hover { background: var(--forest); color: var(--bone); border-color: var(--forest); }
+  .btn-primary { background: var(--forest); color: var(--bone); }
+  .btn-primary:hover { background: var(--forest-deep); }
+
+  /* ---------- Header ---------- */
+  .header {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 60;
+    padding-block: 1.25rem;
+    padding-top: calc(1.25rem + env(safe-area-inset-top, 0px));
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.7s var(--ease), padding 0.7s var(--ease),
+                border-color 0.7s var(--ease), backdrop-filter 0.7s var(--ease);
+  }
+  /* A hero can be bright — misty canopy especially — and bone-on-mist is
+     unreadable. A soft scrim keeps the nav legible over any artwork without
+     the header reading as a solid bar. */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to bottom, rgb(7 19 12 / 0.55) 0%, rgb(7 19 12 / 0.28) 55%, transparent 100%);
+    opacity: 1;
+    transition: opacity 0.7s var(--ease);
+    pointer-events: none;
+  }
+  .header.solid::before { opacity: 0; }
+  .header.solid {
+    background: rgb(253 251 247 / 0.88);
+    backdrop-filter: blur(18px);
+    border-bottom-color: rgb(18 38 26 / 0.1);
+    padding-block: 0.75rem;
+    padding-top: calc(0.75rem + env(safe-area-inset-top, 0px));
+  }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 2.5rem; }
+  .header-right { display: flex; align-items: center; gap: 1.5rem; margin-left: auto; }
+  @media (min-width: 1280px) { .header-right { gap: 2rem; } }
+
+  .wordmark { display: inline-flex; align-items: center; gap: 0.75rem; color: var(--bone); text-decoration: none; transition: color 0.7s var(--ease); }
+  @media (min-width: 640px) { .wordmark { gap: 1rem; } }
+  .header.solid .wordmark { color: var(--forest-deep); }
+  .wordmark-logo { height: 3rem; width: auto; flex: none; display: block; transition: height 0.7s var(--ease); }
+  @media (min-width: 640px) { .wordmark-logo { height: 3.5rem; } }
+  .header.solid .wordmark-logo { height: 2.5rem; }
+  @media (min-width: 640px) { .header.solid .wordmark-logo { height: 2.9rem; } }
+  /* Two files: the logo's own wordmark is dark navy and vanishes on the hero,
+     so the light variant lifts only the darkest pixels to bone. */
+  .wordmark .logo-light { display: block; }
+  .wordmark .logo-colour { display: none; }
+  .header.solid .wordmark .logo-light { display: none; }
+  .header.solid .wordmark .logo-colour { display: block; }
+  .wordmark-rule { width: 1px; height: 2.25rem; background: currentColor; opacity: 0.2; flex: none; display: none; }
+  @media (min-width: 640px) { .wordmark-rule { display: block; } }
+  .wordmark-text { display: flex; flex-direction: column; line-height: 1; }
+  .wordmark-name { font-family: var(--font-display); font-size: 1.3rem; line-height: 0.95; letter-spacing: -0.01em; white-space: nowrap; }
+  @media (min-width: 640px) { .wordmark-name { font-size: 1.5rem; } }
+  .wordmark-sub { margin-top: 0.32em; font-size: 0.5rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.34em; opacity: 0.7; }
+
+  .nav { display: none; gap: 1.5rem; }
+  @media (min-width: 1280px) { .nav { gap: 2rem; } }
+  @media (min-width: 1024px) { .nav { display: flex; } }
+  .nav a {
+    font-size: 0.75rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    color: rgb(243 237 227 / 0.88);
+    position: relative;
+    transition: color 0.5s var(--ease);
+  }
+  .nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: -4px;
+    height: 1px; width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s var(--ease);
+  }
+  .nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav a:hover { color: var(--bone); }
+  .header.solid .nav a { color: rgb(29 59 41 / 0.7); }
+  .header.solid .nav a:hover { color: var(--forest-deep); }
+
+  .header-cta { display: none; }
+  @media (min-width: 768px) { .header-cta { display: inline-flex; padding: 0.85rem 1.5rem; font-size: 0.7rem; flex: none; } }
+  @media (min-width: 1280px) { .header-cta { padding: 0.85rem 1.75rem; font-size: 0.75rem; } }
+  /* On the solid light header the ghost-light button would be invisible. */
+  .header.solid .header-cta { background: var(--forest); color: var(--bone); border-color: var(--forest); }
+  .header.solid .header-cta:hover { background: var(--forest-deep); border-color: var(--forest-deep); }
+
+  .menu-btn {
+    display: grid;
+    place-items: center;
+    width: 2.75rem; height: 2.75rem;
+    border-radius: 999px;
+    border: 1px solid rgb(243 237 227 / 0.3);
+    background: none;
+    color: var(--bone);
+    cursor: pointer;
+    transition: color 0.5s var(--ease), border-color 0.5s var(--ease);
+  }
+  .header.solid .menu-btn { border-color: rgb(18 38 26 / 0.2); color: var(--forest-deep); }
+  @media (min-width: 1024px) { .menu-btn { display: none; } }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 55;
+    background: var(--forest-deep);
+    color: var(--bone);
+    padding-top: 7rem;
+    overflow-y: auto;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 0.8s var(--ease);
+  }
+  .mobile-menu.open { clip-path: inset(0 0 0 0); }
+  .mobile-menu ul { list-style: none; margin: 0; padding: 0; }
+  .mobile-menu li { border-bottom: 1px solid rgb(243 237 227 / 0.1); }
+  .mobile-menu a {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+    padding-block: 1.25rem; text-decoration: none;
+    font-family: var(--font-display); font-size: 2.25rem;
+    opacity: 0; transform: translateY(26px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .mobile-menu.open a { opacity: 1; transform: none; }
+  .mobile-menu a span.hint { font-family: var(--font-body); font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.34em; color: rgb(232 223 209 / 0.4); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 88svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+    background: var(--forest-deep);
+    color: var(--bone);
+    padding-top: 10rem;
+    padding-bottom: 6rem;
+  }
+  .hero-media {
+    position: absolute; inset: 0; z-index: -2;
+    background-size: cover; background-position: center;
+    transform: scale(1.04);
+    animation: slow-zoom 26s ease-out forwards;
+  }
+  @keyframes slow-zoom { to { transform: scale(1.16); } }
+  .hero-scrim {
+    position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(to top, rgb(7 19 12 / 0.9) 0%, rgb(7 19 12 / 0.5) 38%, rgb(7 19 12 / 0.15) 70%, transparent 100%);
+  }
+  .hero h1 { max-width: 18ch; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 3rem; }
+
+  .scroll-cue {
+    position: absolute; right: var(--gutter); bottom: 2.5rem;
+    display: none; flex-direction: column; align-items: center; gap: 1rem;
+  }
+  @media (min-width: 1024px) { .scroll-cue { display: flex; } }
+  .scroll-cue span {
+    writing-mode: vertical-rl;
+    font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.34em;
+    color: rgb(243 237 227 / 0.6);
+  }
+  .scroll-cue .track { position: relative; width: 1px; height: 4rem; background: rgb(243 237 227 / 0.2); overflow: hidden; }
+  .scroll-cue .track i { position: absolute; inset: 0; background: var(--gold); animation: line-pulse 2.4s var(--ease) infinite; }
+  @keyframes line-pulse {
+    0% { transform: scaleY(0); transform-origin: top; }
+    45% { transform: scaleY(1); transform-origin: top; }
+    55% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* Leaves */
+  .leaves { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: hidden; }
+  .leaf { position: absolute; bottom: -12vh; color: rgb(232 223 209 / 0.5); animation: drift linear infinite; }
+  @keyframes drift {
+    0% { transform: translate3d(0,0,0) rotate(0deg); opacity: 0; }
+    12% { opacity: 0.5; }
+    88% { opacity: 0.35; }
+    100% { transform: translate3d(28px,-115vh,0) rotate(220deg); opacity: 0; }
+  }
+
+  /* Background video sits over its own poster and fades in once playing,
+     so a slow or refused autoplay never shows a black rectangle. */
+  .hero-video, .pinned-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s var(--ease);
+  }
+  .hero-video { z-index: -2; }
+  .hero-video.playing, .pinned-video.playing { opacity: 1; }
+
+  /* ---------- Reels ---------- */
+  .reels { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 640px) { .reels { grid-template-columns: repeat(3, 1fr); gap: 2.5rem 1.5rem; } }
+  @media (min-width: 1024px) { .reels.cols-4 { grid-template-columns: repeat(4, 1fr); } }
+  .reel button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; font: inherit; color: inherit; }
+  .reel .frame { aspect-ratio: 9/16; }
+  /* These are not scoped to .reel — the featured band reuses them, and a
+     play button that only exists inside a grid tile is a play button the
+     feature section silently loses. */
+  .veil {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgb(7 19 12 / 0.8) 0%, rgb(7 19 12 / 0.1) 45%, rgb(7 19 12 / 0.2) 100%);
+    transition: opacity 0.7s var(--ease);
+  }
+  button:hover .veil { opacity: 0.8; }
+  .play { position: absolute; inset: 0; display: grid; place-items: center; }
+  .play i {
+    display: grid; place-items: center;
+    width: 3.5rem; height: 3.5rem; border-radius: 999px;
+    border: 1px solid rgb(243 237 227 / 0.6);
+    background: rgb(7 19 12 / 0.3);
+    color: var(--bone);
+    backdrop-filter: blur(2px);
+    transition: transform 0.5s var(--ease), background-color 0.5s var(--ease), color 0.5s var(--ease), border-color 0.5s var(--ease);
+  }
+  button:hover .play i { transform: scale(1.1); background: var(--gold); color: var(--forest-deep); border-color: var(--gold); }
+  .chip {
+    position: absolute; top: 0.75rem; right: 0.75rem;
+    background: rgb(7 19 12 / 0.65); color: rgb(243 237 227 / 0.9);
+    border-radius: 999px; padding: 0.2rem 0.6rem;
+    font-size: 0.6875rem; font-variant-numeric: tabular-nums;
+    backdrop-filter: blur(2px);
+    z-index: 2;
+  }
+  .reel .caption { position: absolute; inset-inline: 0; bottom: 0; padding: 1rem; }
+  .reel .caption b { display: block; font-family: var(--font-display); font-weight: 400; font-size: 1.125rem; line-height: 1.2; color: var(--bone); }
+  @media (min-width: 640px) { .reel .caption b { font-size: 1.25rem; } }
+  .reel .caption span { display: block; margin-top: 0.35rem; font-size: 0.5625rem; text-transform: uppercase; letter-spacing: 0.34em; color: rgb(232 223 209 / 0.6); }
+  .reel .blurb { margin-top: 0.875rem; font-size: 0.8125rem; line-height: 1.6; color: rgb(29 59 41 / 0.7); }
+
+  /* ---------- Founder ---------- */
+  .founder { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) { .founder { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+  .founder-quote {
+    border-left: 2px solid rgb(201 162 39 / 0.6);
+    padding-left: 1.5rem;
+    margin-top: 2.25rem;
+  }
+  .founder-quote p {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+    line-height: 1.3;
+    color: var(--bone);
+  }
+
+  /* ---------- Featured film ---------- */
+  .feature { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 1024px) { .feature { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+  .feature.reverse .feature-media { order: 2; }
+  @media (max-width: 1023px) { .feature.reverse .feature-media { order: 0; } }
+  /* A 9:16 frame gets tall fast, so on desktop it is height-led and the
+     aspect ratio sets the width instead of the other way round. */
+  .feature-frame { aspect-ratio: 9/16; width: 100%; max-width: 22rem; margin-inline: auto; }
+  @media (min-width: 1024px) { .feature-frame { height: 72vh; width: auto; max-width: none; } }
+  .feature-frame .play i { width: 4.5rem; height: 4.5rem; }
+
+  /* Bigger reels: one across on a phone, two on desktop at 76vh tall. */
+  .reels.cols-2 { grid-template-columns: 1fr; gap: 2.5rem; }
+  @media (min-width: 640px) { .reels.cols-2 { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) {
+    .reels.cols-2 .frame { height: 76vh; width: auto; margin-inline: auto; aspect-ratio: 9/16; }
+    .reels.cols-3 .frame { height: 62vh; width: auto; margin-inline: auto; aspect-ratio: 9/16; }
+  }
+
+  /* ---------- Reel player ---------- */
+  .reel-player {
+    position: fixed; inset: 0; z-index: 85;
+    background: rgb(7 19 12 / 0.97);
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .reel-player.open { opacity: 1; pointer-events: auto; }
+  .rp-bar { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem var(--gutter); color: var(--bone); flex: none; }
+  .rp-stage { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; padding-inline: 1rem; }
+  @media (min-width: 640px) { .rp-stage { padding-inline: 5rem; } }
+  .rp-frame { position: relative; height: 100%; aspect-ratio: 9/16; max-width: 100%; background: var(--forest-deep); overflow: hidden; }
+  .rp-frame video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000; }
+  .rp-cap { flex: none; padding: 1.25rem var(--gutter); text-align: center; color: var(--bone); }
+  .rp-cap h2 { font-size: 1.375rem; }
+  .rp-cap p { margin-top: 0.4rem; font-size: 0.875rem; color: rgb(232 223 209 / 0.7); max-width: 32rem; margin-inline: auto; }
+  .rp-cap .excerpt-note { margin-top: 0.6rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold-soft); }
+  .rp-nav { position: absolute; top: 50%; transform: translateY(-50%); display: none; z-index: 2; }
+  @media (min-width: 640px) { .rp-nav { display: grid; } }
+  .rp-prev { left: 1rem; }
+  .rp-next { right: 1rem; }
+
+  /* ---------- Media frames ---------- */
+  .frame { position: relative; overflow: hidden; background: var(--forest-deep); }
+  .frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .frame.zoom img { transition: transform 1.2s var(--ease); }
+  .frame.zoom:hover img { transform: scale(1.045); }
+  .r-43 { aspect-ratio: 4/3; }
+  .r-34 { aspect-ratio: 3/4; }
+  .r-169 { aspect-ratio: 16/9; }
+  .r-45 { aspect-ratio: 4/5; }
+  .r-11 { aspect-ratio: 1/1; }
+  .r-32 { aspect-ratio: 3/2; }
+
+  /* ---------- Grids ---------- */
+  .split { display: grid; gap: 3.5rem; }
+  /* Column spans exist only where the 12-column grid does. Left unscoped they
+     force a multi-column span onto a single-column grid and push the page wide. */
+  @media (min-width: 1024px) {
+    .split { grid-template-columns: repeat(12, 1fr); column-gap: 4rem; }
+    .col-7 { grid-column: span 7; }
+    .col-5 { grid-column: span 5; }
+    .col-6 { grid-column: span 6; }
+    .col-12 { grid-column: 1 / -1; }
+  }
+
+  /* ---------- Teak traits ---------- */
+  .traits { list-style: none; margin: 0; padding: 0; }
+  .trait { border-top: 1px solid rgb(243 237 227 / 0.12); padding-block: 3rem; transition: opacity 0.7s var(--ease); }
+  .trait:last-child { border-bottom: 1px solid rgb(243 237 227 / 0.12); }
+  @media (min-width: 1024px) {
+    .trait { opacity: 0.4; padding-block: 4rem; }
+    .trait.active { opacity: 1; }
+    .trait .frame { display: none; }
+  }
+  .trait-no { font-size: 0.75rem; letter-spacing: 0.18em; color: var(--gold); font-variant-numeric: tabular-nums; }
+  .trait h3 { font-size: clamp(2rem, 4vw, 3rem); margin-top: 1.25rem; }
+  .trait .trait-lede { font-family: var(--font-display); font-style: italic; font-size: 1.35rem; color: rgb(227 199 106 / 0.9); margin-top: 0.75rem; }
+  .trait p.body { margin-top: 1.25rem; color: rgb(232 223 209 / 0.75); max-width: 34rem; }
+
+  .sticky-media { display: none; }
+  @media (min-width: 1024px) {
+    .sticky-media { display: block; position: sticky; top: 8rem; aspect-ratio: 4/5; }
+    .sticky-media .frame { position: absolute; inset: 0; opacity: 0; transition: opacity 1s var(--ease); }
+    .sticky-media .frame.show { opacity: 1; }
+  }
+  .sticky-index {
+    position: absolute; inset-inline: 0; bottom: 0; z-index: 2;
+    display: flex; align-items: flex-end; justify-content: space-between;
+    padding: 1.75rem; pointer-events: none;
+  }
+  .sticky-index .big { font-family: var(--font-display); font-size: 3.75rem; line-height: 1; color: rgb(243 237 227 / 0.9); }
+
+  /* ---------- Pinned video band ---------- */
+  .pinned { position: relative; height: 200svh; background: var(--forest-deep); }
+  .pinned-inner { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; place-items: center; text-align: center; }
+  .pinned-media { position: absolute; inset: 0; background-size: cover; background-position: center; }
+  .pinned-scrim { position: absolute; inset: 0; background: rgb(7 19 12 / 0.6); }
+  .pinned-copy { position: relative; padding-inline: var(--gutter); color: var(--bone); max-width: 52rem; }
+
+  /* ---------- Horizontal journey ---------- */
+  .journey-track-wrap { position: relative; }
+  .journey-viewport { overflow: hidden; }
+  .journey-track { display: flex; gap: 2rem; padding-inline: var(--gutter); list-style: none; margin: 0; width: max-content; will-change: transform; }
+  .stage { width: clamp(20rem, 32vw, 28rem); flex: none; }
+  .stage-no { font-family: var(--font-display); font-size: 3rem; line-height: 1; color: var(--teak); }
+  .stage h3 { font-size: 1.875rem; margin-top: 1.25rem; }
+  .stage .sum { font-family: var(--font-display); font-style: italic; font-size: 1.125rem; color: var(--teak-dark); margin-top: 0.5rem; }
+  .stage p.detail { font-size: 0.875rem; color: rgb(29 59 41 / 0.75); margin-top: 1rem; }
+  .progress-rail { height: 1px; background: rgb(18 38 26 / 0.12); }
+  .progress-rail i { display: block; height: 100%; background: var(--teak); transform-origin: left; transform: scaleX(0); }
+
+  /* ---------- Stats ---------- */
+  .stats { display: grid; gap: 3.5rem 2.5rem; }
+  @media (min-width: 640px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+  .stat { border-top: 1px solid rgb(243 237 227 / 0.15); padding-top: 1.75rem; }
+  .stat .fig { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; font-variant-numeric: tabular-nums; }
+  .stat .fig.pending { color: rgb(243 237 227 / 0.25); }
+  .stat .lbl { margin-top: 1.25rem; font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.18em; color: rgb(232 223 209 / 0.75); }
+  .stat .note { margin-top: 0.5rem; font-size: 0.75rem; color: rgb(232 223 209 / 0.45); }
+
+  /* ---------- Pillars ---------- */
+  .pillars { display: grid; gap: 3rem; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 640px) { .pillars { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .pillars { grid-template-columns: repeat(3, 1fr); column-gap: 3rem; } }
+  .pillar { border-top: 1px solid rgb(243 237 227 / 0.15); padding-top: 1.75rem; }
+  .pillar h3 { font-size: 1.5rem; margin-top: 1.25rem; }
+  .pillar p { margin-top: 0.75rem; font-size: 0.875rem; color: rgb(232 223 209 / 0.75); }
+
+  /* ---------- Why us ---------- */
+  .why-list { list-style: none; margin: 0; padding: 0; }
+  .why-row { border-top: 1px solid rgb(18 38 26 / 0.12); }
+  .why-list li:last-child .why-row { border-bottom: 1px solid rgb(18 38 26 / 0.12); }
+  .why-row button {
+    width: 100%; text-align: left; background: none; border: 0; cursor: pointer;
+    padding-block: 2.25rem; font: inherit; color: inherit;
+    transition: opacity 0.5s var(--ease);
+  }
+  .why-head { display: flex; align-items: baseline; gap: 1.5rem; }
+  .why-head .no { font-size: 0.75rem; letter-spacing: 0.18em; color: var(--teak); font-variant-numeric: tabular-nums; }
+  .why-head h3 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
+  .why-row p { margin-top: 1.25rem; max-width: 34rem; color: rgb(29 59 41 / 0.75); }
+  @media (min-width: 1024px) {
+    .why-row button { opacity: 0.45; }
+    .why-row.active button { opacity: 1; }
+    .why-row .frame { display: none; }
+    .why-row p { margin-left: 3.25rem; }
+  }
+  .why-media { display: none; }
+  @media (min-width: 1024px) {
+    .why-media { display: block; position: sticky; top: 8rem; aspect-ratio: 3/4; }
+    .why-media .frame { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s var(--ease); }
+    .why-media .frame.show { opacity: 1; }
+  }
+
+  /* ---------- Gallery ---------- */
+  .masonry { columns: 1; column-gap: 1.25rem; list-style: none; margin: 0; padding: 0; }
+  @media (min-width: 640px) { .masonry { columns: 2; } }
+  @media (min-width: 1024px) { .masonry { columns: 3; } }
+  .masonry li { break-inside: avoid; margin-bottom: 1.25rem; }
+  .masonry button { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; text-align: left; }
+  .masonry .cap { display: block; margin-top: 0.75rem; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.18em; color: rgb(29 59 41 / 0.55); }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 80;
+    background: rgb(7 19 12 / 0.97);
+    display: flex; flex-direction: column;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.4s var(--ease);
+  }
+  .lightbox.open { opacity: 1; pointer-events: auto; }
+  .lb-bar { display: flex; align-items: center; justify-content: space-between; padding: 1.5rem var(--gutter); color: var(--bone); }
+  .lb-count { font-size: 0.875rem; letter-spacing: 0.18em; color: rgb(232 223 209 / 0.7); font-variant-numeric: tabular-nums; }
+  .lb-stage { position: relative; flex: 1; min-height: 0; display: grid; place-items: center; padding-inline: 1rem; }
+  .lb-stage img { max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; }
+  .lb-cap { padding: 1.5rem var(--gutter); text-align: center; font-family: var(--font-display); font-size: 1.25rem; color: var(--bone); }
+  .round-btn {
+    display: grid; place-items: center;
+    width: 3rem; height: 3rem; border-radius: 999px;
+    border: 1px solid rgb(243 237 227 / 0.25);
+    background: none; color: var(--bone); cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
+  .round-btn:hover { background: var(--bone); color: var(--forest-deep); border-color: var(--bone); }
+  .lb-nav { position: absolute; top: 50%; transform: translateY(-50%); display: none; }
+  @media (min-width: 640px) { .lb-nav { display: grid; } }
+  .lb-prev { left: 1rem; }
+  .lb-next { right: 1rem; }
+
+  /* ---------- Timeline ---------- */
+  .timeline { position: relative; padding-left: 2.5rem; }
+  @media (min-width: 640px) { .timeline { padding-left: 4rem; } }
+  .spine { position: absolute; left: 3px; top: 0.5rem; bottom: 0; width: 1px; background: rgb(18 38 26 / 0.12); }
+  @media (min-width: 640px) { .spine { left: 7px; } }
+  .spine i { display: block; height: 100%; background: var(--teak); transform-origin: top; transform: scaleY(0); }
+  .milestones { list-style: none; margin: 0; padding: 0; display: grid; gap: 5rem; }
+  .milestone { position: relative; }
+  .node { position: absolute; left: -2.5rem; top: 0.5rem; width: 9px; height: 9px; border-radius: 999px; background: var(--teak); }
+  @media (min-width: 640px) { .node { left: -4rem; width: 15px; height: 15px; box-shadow: 0 0 0 4px var(--paper); } }
+  .milestone .year { font-family: var(--font-display); font-size: 2.25rem; line-height: 1; color: var(--teak); }
+  .milestone .stage-lbl { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.34em; color: rgb(29 59 41 / 0.35); }
+  .milestone h3 { font-size: 1.875rem; margin-top: 0.75rem; }
+  .milestone p { margin-top: 1rem; max-width: 34rem; color: rgb(29 59 41 / 0.75); }
+
+  /* ---------- Closing CTA ---------- */
+  .cta {
+    position: relative; isolation: isolate;
+    min-height: 80svh; display: grid; place-items: center; text-align: center;
+    background: var(--forest-deep); color: var(--bone); overflow: hidden;
+  }
+  .cta-media { position: absolute; inset: 0; z-index: -2; background-size: cover; background-position: center; }
+  .cta-scrim { position: absolute; inset: 0; z-index: -1; background: rgb(7 19 12 / 0.55); }
+
+  /* ---------- Footer ---------- */
+  .footer { background: var(--forest-deep); color: var(--bone); }
+  .footer-statement { border-bottom: 1px solid rgb(243 237 227 / 0.1); padding-block: var(--section); }
+  .footer-grid { display: grid; gap: 3.5rem; padding-block: 5rem; }
+  @media (min-width: 1024px) {
+    .footer-grid { grid-template-columns: repeat(12, 1fr); column-gap: 2.5rem; }
+    .fcol-brand { grid-column: span 4; }
+    .fcol-nav { grid-column: 6 / span 5; }
+    .fcol-parent { grid-column: 10 / span 3; }
+  }
+  .footer h2.col-head { font-size: 0.6875rem; font-family: var(--font-body); font-weight: 500; text-transform: uppercase; letter-spacing: 0.34em; color: rgb(232 223 209 / 0.45); margin-bottom: 1.5rem; }
+  .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.875rem; }
+  .footer a { color: rgb(232 223 209 / 0.8); text-decoration: none; }
+  .footer a:hover { color: var(--bone); }
+  .footer-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+  @media (min-width: 640px) { .footer-cols { grid-template-columns: repeat(3, 1fr); } }
+  .footer-bottom {
+    border-top: 1px solid rgb(243 237 227 / 0.1);
+    padding-block: 1.75rem;
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    justify-content: space-between; align-items: center;
+    font-size: 0.75rem; color: rgb(232 223 209 / 0.45);
+  }
+  .parent-lockup { display: inline-flex; width: fit-content; }
+  .parent-lockup img { width: 140px; height: auto; }
+
+  .contact-line { font-size: 0.9375rem; color: rgb(232 223 209 / 0.85); }
+  .contact-line strong { font-weight: 500; color: var(--bone); }
+
+  /* Preview banner */
+  .preview-note { max-width: 34rem; color: rgb(232 223 209 / 0.4); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+    .js .rv, .js .line-mask > span { opacity: 1; transform: none; }
+    .leaves { display: none; }
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap">
+
+<header class="header" id="header">
+  <div class="shell header-inner">
+    <a class="wordmark" href="#top">
+      <img class="wordmark-logo logo-light" src="media/brand/ganesh-nursery-logo-light.png" alt="Ganesh Nursery logo" width="391" height="327">
+      <img class="wordmark-logo logo-colour" src="media/brand/ganesh-nursery-logo.png" alt="" width="391" height="327">
+      <span class="wordmark-rule" aria-hidden="true"></span>
+      <span class="wordmark-text">
+        <span class="wordmark-name">Burma&nbsp;Teak</span>
+        <span class="wordmark-sub">Plantation</span>
+      </span>
+    </a>
+
+    <div class="header-right">
+      <nav class="nav" aria-label="Primary">
+      <a href="#top">Home</a>
+      <a href="#intro">About</a>
+      <a href="#teak">Teak</a>
+      <a href="#plantation">Plantation</a>
+      <a href="#sustainability">Sustainability</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#films">Films</a>
+      <a href="#contact">Contact</a>
+      </nav>
+
+      <div style="display:flex; align-items:center; gap:0.75rem;">
+      <a class="btn btn-light header-cta" href="#contact">Enquire Now</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M3 7h18M3 12h18M3 17h18" stroke-linecap="round"/>
+        </svg>
+      </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="shell">
+    <ul>
+      <li><a href="#top">Home <span class="hint">The beginning</span></a></li>
+      <li><a href="#intro">About <span class="hint">Who we are</span></a></li>
+      <li><a href="#teak">Teak <span class="hint">Why Burma teak</span></a></li>
+      <li><a href="#plantation">Plantation <span class="hint">Soil to canopy</span></a></li>
+      <li><a href="#sustainability">Sustainability <span class="hint">With nature</span></a></li>
+      <li><a href="#gallery">Gallery <span class="hint">In pictures</span></a></li>
+      <li><a href="#films">Films <span class="hint">From the nursery</span></a></li>
+      <li><a href="#founder">Founder <span class="hint">The person behind it</span></a></li>
+      <li><a href="#contact">Contact <span class="hint">Talk to us</span></a></li>
+    </ul>
+    <p class="eyebrow" style="margin-top:3rem; color:rgb(232 223 209 / 0.45);">Speak to us</p>
+    <p style="margin-top:0.75rem; font-family:var(--font-display); font-size:1.5rem;">+91 99431 19955</p>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top" aria-label="Introduction">
+  <div class="hero-media" data-bg="media/posters/hero-wide.jpg"></div>
+  <video class="hero-video" id="heroVideo" muted loop playsinline preload="auto"
+         poster="media/posters/hero-wide.jpg" aria-hidden="true"></video>
+  <div class="hero-scrim"></div>
+  <div class="leaves" id="leaves" aria-hidden="true"></div>
+
+  <div class="shell">
+    <p class="eyebrow" style="color:var(--gold); margin-bottom:2rem;"><span class="rule"></span>Burma Teak Plantation</p>
+
+    <h1 class="d-xl" id="heroHeading">
+      <span class="line-mask"><span>Rooted in nature.</span></span>
+      <span class="line-mask"><span>Built for generations.</span></span>
+    </h1>
+
+    <p class="lede measure rv" style="margin-top:2.25rem; color:rgb(232 223 209 / 0.85);">
+      Premium teak cultivation rooted in quality, sustainability and long-term value — grown at Gandarvakottai with the care of a nursery established in 1980.
+    </p>
+
+    <div class="hero-actions rv">
+      <a class="btn btn-gold" href="#plantation">Explore Our Plantation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-light" href="#contact">Get In Touch
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true">
+    <span>Scroll to explore</span>
+    <span class="track"><i></i></span>
+  </div>
+</section>
+
+<!-- ================= INTRO ================= -->
+<section class="section" id="intro">
+  <div class="shell split">
+    <div class="col-7">
+      <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.5rem;"><span class="rule"></span>Introduction</p>
+      <h2 class="d-lg">
+        <span class="line-mask"><span>More than a tree.</span></span>
+        <span class="line-mask"><span>A legacy.</span></span>
+      </h2>
+    </div>
+
+    <div class="col-5" style="display:flex; flex-direction:column; justify-content:flex-end;">
+      <div class="rv">
+        <p class="lede">Burma Teak Plant is the teak venture of Ganesh Nursery at Gandarvakottai, near Thanjavur — a nursery that has been putting saplings into Tamil Nadu soil since 1980.</p>
+        <p style="margin-top:1.5rem; color:rgb(29 59 41 / 0.75);">Teak is the one thing a nursery sells that does not answer you quickly. A fruit tree fruits; a hedge fills in. A teak plantation replies in decades — and by then every early decision has either compounded in your favour or quietly cost you.</p>
+        <p style="margin-top:1.5rem; color:rgb(29 59 41 / 0.75);">That long feedback loop is the whole discipline, and it is why we stay involved long after the sale would normally have ended.</p>
+        <a class="btn btn-outline" style="margin-top:2.5rem;" href="#intro">Our Story
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="frame r-169 rv" data-img="media/about/about-main.jpg" data-alt="Mature teak trunks standing close together" style="margin-top:1.5rem;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAK STORY ================= -->
+<section class="section on-dark" id="teak">
+  <div class="shell">
+    <div style="max-width:48rem;">
+      <p class="eyebrow rv" style="color:var(--gold); margin-bottom:2.5rem;"><span class="rule"></span>The Timber</p>
+      <h2 class="d-lg"><span class="line-mask"><span>Why Burma teak?</span></span></h2>
+      <p class="lede measure rv" style="margin-top:2rem;">Teak earned its reputation over centuries of hard use — in ships, in temple joinery, in furniture that outlived the households it was built for. Five qualities explain why.</p>
+    </div>
+
+    <div class="split" style="margin-top:5rem;">
+      <div class="col-6">
+        <div class="sticky-media" id="stickyMedia"></div>
+      </div>
+      <ol class="traits col-6" id="traits"></ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PINNED VIDEO BAND ================= -->
+<section class="pinned" aria-labelledby="pinnedHeading">
+  <div class="pinned-inner">
+    <div class="pinned-media" id="pinnedMedia" data-bg="media/posters/plantation-story-wide.jpg"></div>
+    <video class="pinned-video" id="pinnedVideo" muted loop playsinline preload="none"
+           poster="media/posters/plantation-story-wide.jpg" aria-hidden="true"></video>
+    <div class="pinned-scrim"></div>
+    <div class="pinned-copy">
+      <p class="eyebrow rv" style="color:var(--gold); justify-content:center; margin-bottom:2rem;">The Long View</p>
+      <h2 class="d-lg" id="pinnedHeading">Every tree has a story.</h2>
+      <p class="lede rv" style="margin-top:2rem; margin-inline:auto; max-width:36rem; color:rgb(232 223 209 / 0.8);">Ours begins on prepared ground, in a season chosen carefully, and takes decades to finish telling.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PLANTATION JOURNEY ================= -->
+<section id="plantation" style="background:var(--bone);">
+  <div class="shell" style="padding-top:var(--section);">
+    <div style="max-width:48rem;">
+      <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.5rem;"><span class="rule"></span>The Lifecycle</p>
+      <h2 class="d-lg">
+        <span class="line-mask"><span>From soil</span></span>
+        <span class="line-mask"><span>to canopy.</span></span>
+      </h2>
+      <p class="lede measure rv" style="margin-top:2rem;">Six stages, spread across a working lifetime. Every one of them is a decision that the next stage inherits.</p>
+    </div>
+  </div>
+
+  <div class="journey-track-wrap" id="journeyWrap">
+    <div class="journey-viewport" id="journeyViewport">
+      <ol class="journey-track" id="journeyTrack"></ol>
+    </div>
+    <div class="shell" style="margin-top:3rem; padding-bottom:var(--section);">
+      <div class="progress-rail"><i id="journeyProgress"></i></div>
+      <p class="eyebrow" style="margin-top:1rem; color:rgb(29 59 41 / 0.45);" id="journeyHint">Scroll to follow the lifecycle</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="section on-dark" style="background:var(--forest);">
+  <div class="shell">
+    <h2 class="eyebrow rv" style="color:var(--gold); margin-bottom:4rem;">By the numbers</h2>
+    <div class="stats">
+      <div class="stat rv">
+        <p class="fig pending">—</p>
+        <p class="lbl">Acres Under Plantation</p>
+      </div>
+      <div class="stat rv">
+        <p class="fig pending">—</p>
+        <p class="lbl">Teak Saplings Cultivated</p>
+      </div>
+      <div class="stat rv">
+        <p class="fig pending">—</p>
+        <p class="lbl">Plantations Supported</p>
+      </div>
+      <div class="stat rv">
+        <p class="fig" data-count="46">0</p>
+        <p class="lbl">Years of Nursery Heritage</p>
+        <p class="note">Ganesh Nursery, established 1980</p>
+      </div>
+    </div>
+    <p style="margin-top:3rem; font-size:0.8125rem; color:rgb(232 223 209 / 0.45); max-width:34rem;">
+      Three figures are shown as pending rather than invented. They become animated counters the moment real numbers are added to the config file.
+    </p>
+  </div>
+</section>
+
+<!-- ================= SUSTAINABILITY ================= -->
+<section class="section on-dark" id="sustainability" style="position:relative; isolation:isolate;">
+  <div style="position:absolute; inset:0; z-index:-1; overflow:hidden;">
+    <div id="sustYoung" style="position:absolute; inset:0; background-size:cover; background-position:center;" data-bg="media/sustainability/sustainability-young.jpg"></div>
+    <div id="sustMature" style="position:absolute; inset:0; background-size:cover; background-position:center; opacity:0;" data-bg="media/sustainability/sustainability-mature.jpg"></div>
+    <div style="position:absolute; inset:0; background:rgb(7 19 12 / 0.74);"></div>
+  </div>
+
+  <div class="shell">
+    <div style="max-width:48rem;">
+      <p class="eyebrow rv" style="color:var(--gold); margin-bottom:2.5rem;"><span class="rule"></span>Sustainability</p>
+      <h2 class="d-lg">
+        <span class="line-mask"><span>Growing</span></span>
+        <span class="line-mask"><span>with nature.</span></span>
+      </h2>
+      <p class="lede measure rv" style="margin-top:2rem;">Over a teak horizon, soil and water are not sustainability talking points. They are the asset. Degrade them and the plantation quietly stops working, whatever the planting plan said.</p>
+    </div>
+
+    <ul class="pillars" style="margin-top:5rem;" id="pillars"></ul>
+  </div>
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="section">
+  <div class="shell">
+    <div style="max-width:48rem;">
+      <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.5rem;"><span class="rule"></span>Why Work With Us</p>
+      <h2 class="d-lg">
+        <span class="line-mask"><span>Five reasons</span></span>
+        <span class="line-mask"><span>growers stay.</span></span>
+      </h2>
+    </div>
+
+    <div class="split" style="margin-top:5rem;">
+      <ol class="why-list col-7" id="whyList"></ol>
+      <div class="col-5">
+        <div class="why-media" id="whyMedia"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="section" id="gallery" style="background:var(--bone);">
+  <div class="shell">
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:2rem;">
+      <div style="max-width:40rem;">
+        <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.5rem;"><span class="rule"></span>Gallery</p>
+        <h2 class="d-md">
+          <span class="line-mask"><span>The plantation,</span></span>
+          <span class="line-mask"><span>in pictures.</span></span>
+        </h2>
+      </div>
+      <p class="rv" style="font-size:0.8125rem; color:rgb(29 59 41 / 0.55);">Click any image — full-screen viewer, arrow keys, Esc to close</p>
+    </div>
+
+    <ul class="masonry" id="masonry" style="margin-top:4rem;"></ul>
+  </div>
+</section>
+
+<!-- ================= FEATURED FILM ================= -->
+<section class="section" style="background:var(--bone);" id="feature">
+  <div class="shell feature" id="featureBlock">
+    <div class="feature-media">
+      <button type="button" data-film="0" aria-label="Play film: What Burma Teak Is" style="display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;">
+        <div class="frame feature-frame">
+          <img src="media/posters/burma-teak-plant.jpg" alt="" loading="lazy" decoding="async">
+          <span class="veil"></span>
+          <span class="chip">2:13</span>
+          <span class="play"><i><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></i></span>
+        </div>
+      </button>
+    </div>
+    <div>
+      <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.25rem;"><span class="rule"></span>Watch</p>
+      <h2 class="d-md">
+        <span class="line-mask"><span>What Burma</span></span>
+        <span class="line-mask"><span>teak is.</span></span>
+      </h2>
+      <p class="lede measure rv" style="margin-top:2rem;">
+        An introduction to Burma teak at the nursery — what the plant is, and why growers ask
+        for it by name.
+      </p>
+      <p class="rv" style="margin-top:1.5rem; font-size:0.6875rem; text-transform:uppercase; letter-spacing:0.34em; color:rgb(29 59 41 / 0.5);">
+        2:13 · Narrated in Tamil
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FILMS ================= -->
+<section class="section" id="films">
+  <div class="shell">
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:2rem;">
+      <div style="max-width:40rem;">
+        <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.5rem;"><span class="rule"></span>From The Nursery</p>
+        <h2 class="d-md">
+          <span class="line-mask"><span>Walk the rows</span></span>
+          <span class="line-mask"><span>with us.</span></span>
+        </h2>
+        <p class="lede measure rv" style="margin-top:1.75rem;">
+          Filmed vertically, for the phone — and shown here the way they were made, rather than
+          cropped into a shape they were never framed for. Three of the seven are below; in the
+          build the rest sit on the pages their subject belongs to.
+        </p>
+      </div>
+      <p class="rv" style="font-size:0.8125rem; color:rgb(29 59 41 / 0.55); max-width:16rem;">
+        Narrated in Tamil. Nothing plays until you choose it.
+      </p>
+    </div>
+
+    <ul class="reels cols-3" id="reels" style="margin-top:4rem;"></ul>
+  </div>
+</section>
+
+<!-- ================= FOUNDER ================= -->
+<section class="section on-dark" id="founder">
+  <div class="shell founder">
+    <div>
+      <div class="frame r-34 rv" data-img="media/founder/founder-portrait.jpg" data-alt="The proprietor of Ganesh Nursery"></div>
+    </div>
+    <div>
+      <p class="eyebrow rv" style="color:var(--gold); margin-bottom:2.25rem;"><span class="rule"></span>The Person Behind It</p>
+      <h2 class="d-md">
+        <span class="line-mask"><span>Someone has to</span></span>
+        <span class="line-mask"><span>think in decades.</span></span>
+      </h2>
+      <div class="founder-quote rv">
+        <p>&ldquo;A nursery can sell you a plant in an afternoon. Teak asks you to care about what that
+        plant becomes forty years from now, when the decision is no longer yours to make. That is
+        the part I take seriously.&rdquo;</p>
+      </div>
+      <p class="rv" style="margin-top:1.75rem; max-width:34rem; color:rgb(232 223 209 / 0.75);">
+        Ganesh Nursery has been putting plants into Tamil Nadu soil since 1980. Burma Teak Plant
+        is what happens when that habit is pointed at a tree you will not live to cut.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BURMA CONNECTION ================= -->
+<section class="section" style="background:var(--bone);" id="burma">
+  <div class="shell founder">
+    <div>
+      <figure style="margin:0;">
+        <div class="frame r-34 rv" data-img="media/founder/founder-burma-portrait.jpg" data-alt="The proprietor at Karaweik Palace in Yangon, Myanmar"></div>
+        <figcaption style="margin-top:1rem; font-size:0.6875rem; text-transform:uppercase; letter-spacing:0.34em; color:rgb(29 59 41 / 0.5);">Karaweik Palace, Yangon</figcaption>
+      </figure>
+    </div>
+    <div>
+      <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.25rem;"><span class="rule"></span>Where The Name Comes From</p>
+      <h2 class="d-md">
+        <span class="line-mask"><span>Burma set</span></span>
+        <span class="line-mask"><span>the standard.</span></span>
+      </h2>
+      <p class="lede measure rv" style="margin-top:2rem;">
+        Teak takes the name &ldquo;Burma teak&rdquo; from the forests of Myanmar, where slow growth,
+        tight grain and clean form set the benchmark the timber trade still measures against.
+      </p>
+      <p class="rv" style="margin-top:1.5rem; max-width:34rem; color:rgb(29 59 41 / 0.75);">
+        It is a standard, not a shortcut. The same quality is only reached elsewhere by giving the
+        tree the same time and the same care — which is the whole argument for growing it properly
+        here.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section class="section">
+  <div class="shell">
+    <div style="max-width:48rem;">
+      <p class="eyebrow rv" style="color:var(--teak); margin-bottom:2.5rem;"><span class="rule"></span>Our Journey</p>
+      <h2 class="d-lg">
+        <span class="line-mask"><span>Four decades</span></span>
+        <span class="line-mask"><span>of planting.</span></span>
+      </h2>
+    </div>
+
+    <div class="timeline" id="timeline" style="margin-top:5rem;">
+      <div class="spine"><i id="spineFill"></i></div>
+      <ol class="milestones" id="milestones"></ol>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="cta" id="contact">
+  <div class="cta-media" data-bg="media/plantation/plantation-cta.jpg"></div>
+  <div class="cta-scrim"></div>
+  <div class="shell" style="padding-block:var(--section);">
+    <h2 class="d-lg rv" style="max-width:20ch; margin-inline:auto;">Plant something that outlives you.</h2>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:3rem;" class="rv">
+      <a class="btn btn-gold" href="#contact">Start A Conversation
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a class="btn btn-light" href="#intro">Explore Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="shell footer-statement">
+    <p class="d-lg">
+      <span class="line-mask"><span>Rooted in nature.</span></span>
+      <span class="line-mask"><span>Growing for tomorrow.</span></span>
+    </p>
+  </div>
+
+  <div class="shell footer-grid">
+    <div class="fcol-brand rv">
+      <span class="wordmark" style="color:var(--bone);">
+      <img class="wordmark-logo logo-light" src="media/brand/ganesh-nursery-logo-light.png" alt="Ganesh Nursery logo" width="391" height="327">
+      <img class="wordmark-logo logo-colour" src="media/brand/ganesh-nursery-logo.png" alt="" width="391" height="327">
+      <span class="wordmark-rule" aria-hidden="true"></span>
+        <span class="wordmark-text">
+          <span class="wordmark-name">Burma&nbsp;Teak</span>
+          <span class="wordmark-sub">By Ganesh Nursery</span>
+        </span>
+      </span>
+      <p class="lede" style="margin-top:1.75rem; max-width:24rem;">Premium Burma teak cultivation rooted in quality, sustainability and long-term value.</p>
+
+      <div style="margin-top:2.25rem; display:grid; gap:0.875rem;">
+        <p class="contact-line">Phone — <strong>+91 99431 19955</strong></p>
+        <p class="contact-line">WhatsApp — <strong>+91 99431 19955</strong></p>
+        <p class="contact-line">Gandarvakottai, Pudukkottai District</p>
+        <p class="contact-line">Tamil Nadu 613301, India</p>
+      </div>
+    </div>
+
+    <div class="fcol-nav footer-cols rv">
+      <div>
+        <h2 class="col-head">Explore</h2>
+        <ul>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#intro">About</a></li>
+          <li><a href="#teak">Burma Teak</a></li>
+          <li><a href="#plantation">Plantation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="col-head">Company</h2>
+        <ul>
+          <li><a href="#sustainability">Sustainability</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#films">Films</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="col-head">Legal</h2>
+        <ul>
+          <li><a href="#contact">Privacy Policy</a></li>
+          <li><a href="#contact">Terms &amp; Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fcol-parent rv">
+      <h2 class="col-head">A venture of</h2>
+        <span class="parent-lockup"><img src="media/brand/ganesh-nursery-logo-light.png" alt="Ganesh Nursery" width="391" height="327"></span>
+      <p style="margin-top:1.25rem; font-size:0.875rem; color:rgb(232 223 209 / 0.55);">Supplying timber saplings, fruit trees and native plants from Gandarvakottai, near Thanjavur, since 1980.</p>
+    </div>
+  </div>
+
+  <div class="shell footer-bottom">
+    <p>© 2026 Burma Teak Plant. All rights reserved.</p>
+    <p class="preview-note">Design preview of the Next.js homepage. Films are 18-second excerpts; the build ships the full seven. Still imagery is generated placeholder artwork awaiting client photography.</p>
+    <p>burmateakplant.com</p>
+  </div>
+</footer>
+
+<!-- ================= REEL PLAYER ================= -->
+<div class="reel-player" id="reelPlayer" role="dialog" aria-modal="true" aria-label="Film player">
+  <div class="rp-bar">
+    <p class="lb-count" id="rpCount">01 / 07</p>
+    <button class="round-btn" id="rpClose" aria-label="Close film">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="rp-stage">
+    <button class="round-btn rp-nav rp-prev" id="rpPrev" aria-label="Previous film">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="rp-frame">
+      <video id="rpVideo" controls playsinline preload="metadata"></video>
+    </div>
+    <button class="round-btn rp-nav rp-next" id="rpNext" aria-label="Next film">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <div class="rp-cap">
+    <h2 id="rpTitle"></h2>
+    <p id="rpDesc"></p>
+    <p class="excerpt-note">18-second excerpt — the full film ships in the build</p>
+  </div>
+</div>
+
+<!-- ================= LIGHTBOX ================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lb-bar">
+    <p class="lb-count" id="lbCount">01 / 12</p>
+    <button class="round-btn" id="lbClose" aria-label="Close image viewer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="lb-stage">
+    <img id="lbImage" alt="" hidden>
+    <button class="round-btn lb-nav lb-prev" id="lbPrev" aria-label="Previous image">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 6l-6 6 6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="round-btn lb-nav lb-next" id="lbNext" aria-label="Next image">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+  <p class="lb-cap" id="lbCaption"></p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add('js');
+
+  var ARROW = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+  // ---------- Data ----------
+  var traits = [
+    { n: '01', t: 'Durability', l: 'A timber that refuses to age quickly.', b: 'Teak carries natural oils and silica within its heartwood. That internal chemistry is why teak has been chosen for shipbuilding, temple joinery and outdoor furniture for centuries — it endures weather, humidity and time with very little intervention.', img: 'media/teak/teak-grain.jpg', alt: 'Close detail of teak heartwood grain' },
+    { n: '02', t: 'Strength', l: 'Dimensionally stable, season after season.', b: 'Well-grown teak moves very little once seasoned. It holds its shape through monsoon and dry season alike, resisting the warping, splitting and shrinkage that trouble lesser hardwoods — which is why joiners trust it for work meant to last.', img: 'media/teak/teak-timber.jpg', alt: 'Sawn teak timber showing dense, straight grain' },
+    { n: '03', t: 'Natural Beauty', l: 'Golden brown, deepening with every year.', b: 'Freshly worked teak is a warm honey gold. Left to breathe, it settles into a deeper amber brown with a quiet lustre that needs no varnish. The grain is straight and even, with a figure that rewards a close look.', img: 'media/teak/teak-leaf.jpg', alt: 'Broad teak leaf backlit by morning sun' },
+    { n: '04', t: 'Natural Resistance', l: 'Protected from within.', b: 'The same oils that give teak its scent also deter termites, borers and fungal decay. Mature heartwood defends itself, which means less chemical treatment across the life of the timber and a cleaner story from plantation to product.', img: 'media/teak/teak-bark.jpg', alt: 'Textured bark of a mature teak tree' },
+    { n: '05', t: 'Longevity', l: 'Planted for a horizon you will not rush.', b: 'Teak is not a quick crop. It is a long-horizon tree, and that is precisely the point — a plantation established with care becomes an appreciating asset that is handed on rather than consumed.', img: 'media/teak/teak-canopy.jpg', alt: 'Teak canopy seen from the forest floor' }
+  ];
+
+  var stages = [
+    { n: '01', t: 'Land Preparation', s: 'Reading the ground before a single sapling is planted.', d: 'Soil depth, drainage and slope decide how a teak plantation will behave twenty years from now. The land is assessed, cleared, contoured and prepared so that young roots meet loose, well-drained earth rather than compaction.', img: 'media/plantation/plantation-01-land.jpg', alt: 'Prepared plantation land contoured and ready for planting' },
+    { n: '02', t: 'Planting', s: 'Spacing is a decision you live with for decades.', d: 'Saplings are set out at considered spacing and depth, timed to the season so that the first rains do the work. Correct spacing now determines canopy, girth and timber quality later.', img: 'media/plantation/plantation-02-planting.jpg', alt: 'Teak sapling being planted in prepared ground' },
+    { n: '03', t: 'Early Growth', s: 'The years that decide the shape of the tree.', d: 'The first seasons are the vulnerable ones. Weeding, watering and protection from grazing keep young teak climbing straight and fast while it establishes the root system it will rely on for life.', img: 'media/plantation/plantation-03-growth.jpg', alt: 'Young teak plants in early growth' },
+    { n: '04', t: 'Care & Management', s: 'Pruning, thinning, watching.', d: 'A plantation is tended, not simply left. Pruning builds a clean bole, thinning gives the best stems the light and room they need, and regular inspection catches problems while they are still small.', img: 'media/plantation/plantation-04-care.jpg', alt: 'Plantation worker pruning a growing teak tree' },
+    { n: '05', t: 'Maturity', s: 'Canopy closes. Heartwood forms.', d: 'As the canopy closes the stand regulates itself. Girth thickens, heartwood develops its colour and oils, and the plantation begins to look and behave like forest rather than like a crop.', img: 'media/plantation/plantation-05-maturity.jpg', alt: 'Mature teak plantation with closed canopy' },
+    { n: '06', t: 'Future Harvest', s: 'A decision for the next generation.', d: 'Harvest is planned, selective and documented, with replanting built into the plan from the start. What leaves the plantation is premium timber; what stays behind is ground ready to grow the next stand.', img: 'media/plantation/plantation-06-harvest.jpg', alt: 'Mature teak trunks ready for selective harvest' }
+  ];
+
+  var pillars = [
+    { t: 'Soil Health', b: 'Ground cover, organic matter and minimal disturbance keep topsoil where it belongs. Healthy soil is the only input a plantation cannot buy back later.' },
+    { t: 'Water Management', b: 'Contouring, mulching and season-aware irrigation make rainfall count, so young stands are carried through dry months without drawing down groundwater.' },
+    { t: 'Biodiversity', b: 'Native margins, undisturbed corners and mixed planting give birds, pollinators and soil life somewhere to stay. A plantation with life in it defends itself.' },
+    { t: 'Sustainable Forestry', b: 'Selective harvesting with replanting designed in from the outset — the stand is renewed rather than cleared.' },
+    { t: 'Long-Term Cultivation', b: 'Teak rewards patience. Decisions are measured against a horizon of decades, which quietly rules out most shortcuts.' },
+    { t: 'Environmental Responsibility', b: 'Minimal chemical dependence, reduced waste and careful handling of plantation residue, because what a plantation returns to the land matters as much as what it takes.' }
+  ];
+
+  var advantages = [
+    { n: '01', t: 'Quality', b: 'Planting stock is selected, not simply supplied. The quality of a plantation is decided in its first season, and it begins with the sapling.', img: 'media/company/why-01-quality.jpg', alt: 'Healthy teak saplings graded in the nursery' },
+    { n: '02', t: 'Nursery Heritage', b: 'Burma Teak Plant grows out of Ganesh Nursery, which has supplied timber saplings, fruit trees and native plants from Gandarvakottai, near Thanjavur, since 1980. Four decades of nursery practice sit behind every plant.', img: 'media/company/why-02-heritage.jpg', alt: 'Holding a teak sapling among the nursery beds' },
+    { n: '03', t: 'Plantation Care', b: 'Support does not stop at delivery. Guidance through spacing, early growth, pruning and thinning is where a plantation is actually made.', img: 'media/company/why-03-care.jpg', alt: 'Plantation being tended during early growth' },
+    { n: '04', t: 'Sustainability', b: 'Soil, water and biodiversity are treated as plantation infrastructure rather than as a postscript — because over a teak horizon, they are.', img: 'media/company/why-04-sustainability.jpg', alt: 'Mixed planting and native margins beside a teak stand' },
+    { n: '05', t: 'Long-Term Vision', b: 'We are in the business of trees that outlive the people who plant them. Every recommendation we make is weighed on that timescale.', img: 'media/company/why-05-vision.jpg', alt: 'Mature teak plantation stretching into the distance' }
+  ];
+
+  var gallery = [
+    { src: 'media/gallery/plantation/plantation-01.jpg', cap: "Young stand, mid season", alt: "Rows of young teak in an established plantation", r: 'r-169' },
+    { src: 'media/gallery/teak-plants/teak-plant-01.jpg', cap: "Nursery-raised sapling", alt: "A single teak sapling with broad young leaves", r: 'r-34' },
+    { src: 'media/gallery/trees/tree-02.jpg', cap: "Canopy and sky", alt: "Teak crowns against an open sky", r: 'r-11' },
+    { src: 'media/gallery/nursery/nursery-01.jpg', cap: "In the beds", alt: "Teak saplings in their nursery bags, packed close together", r: 'r-43' },
+    { src: 'media/gallery/plantation/plantation-02.jpg', cap: "Light through the crowns", alt: "Sunlight breaking through the crowns of mature teak", r: 'r-34' },
+    { src: 'media/gallery/land/land-02.jpg', cap: "Blocked out", alt: "Nursery ground divided into planting blocks, seen from above", r: 'r-43' },
+    { src: 'media/gallery/products/product-03.jpg', cap: "Worked into a gate", alt: "Teak planks worked into a heavy gate, grain running vertically", r: 'r-34' },
+    { src: 'media/gallery/trees/tree-01.jpg', cap: "A clean bole", alt: "A mature teak trunk rising from forest undergrowth", r: 'r-34' },
+    { src: 'media/gallery/plantation/plantation-04.jpg', cap: "Standing timber", alt: "Mature teak trunks standing close together", r: 'r-43' },
+    { src: 'media/gallery/nursery/nursery-03.jpg', cap: "Hardened off", alt: "A nursery-raised teak sapling against the sky", r: 'r-34' },
+    { src: 'media/gallery/farming/farming-04.jpg', cap: "Carrying water", alt: "Young teak rows standing under irrigation", r: 'r-43' },
+    { src: 'media/gallery/trees/tree-04.jpg', cap: "Into the stand", alt: "A stand of mature teak receding into the distance", r: 'r-169' }
+  ];
+
+  var milestones = [
+    { y: '1980', t: 'Foundation', b: 'Ganesh Nursery is established at Gandarvakottai, near Thanjavur, supplying timber saplings, fruit trees and native plants to growers across Tamil Nadu.', img: 'media/company/journey-01-foundation.jpg', alt: 'Broad teak leaves in the nursery beds' },
+    { y: null, t: 'Plantation Development', b: 'Focus widens from supplying saplings to developing full teak plantations — site assessment, spacing, planting and early-growth care.', img: 'media/company/journey-02-development.jpg', alt: 'Early teak plantation under development' },
+    { y: null, t: 'Growth', b: null, img: 'media/company/journey-03-growth.jpg', alt: 'Expanding teak plantation in early growth' },
+    { y: null, t: 'Expansion', b: null, img: 'media/company/journey-04-expansion.jpg', alt: 'Wider plantation landscape' },
+    { y: 'Ahead', t: 'Future Vision', b: 'Burma Teak Plant continues to grow teak the long way — stands established with care today, handed on as timber and as land in better condition than we found it.', img: 'media/company/journey-05-future.jpg', alt: 'Young teak plantation reaching toward the sky' }
+  ];
+
+  // ---------- Helpers ----------
+  function el(tag, cls, html) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function frame(src, alt, ratio, extraCls) {
+    return '<div class="frame ' + ratio + (extraCls ? ' ' + extraCls : '') + '">' +
+      '<img src="' + src + '" alt="' + alt + '" loading="lazy" decoding="async">' +
+      '</div>';
+  }
+
+  // Background images via data-bg so the markup stays clean
+  Array.prototype.forEach.call(document.querySelectorAll('[data-bg]'), function (node) {
+    node.style.backgroundImage = 'url("' + node.getAttribute('data-bg') + '")';
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-img]'), function (node) {
+    var img = new Image();
+    img.src = node.getAttribute('data-img');
+    img.alt = node.getAttribute('data-alt') || '';
+    img.loading = 'lazy';
+    node.appendChild(img);
+  });
+
+  // ---------- Leaves ----------
+  var leafBox = document.getElementById('leaves');
+  if (leafBox && !reduced) {
+    var lefts = [4, 14, 23, 31, 42, 49, 58, 66, 74, 81, 89, 95];
+    var durs = [19, 26, 22, 30, 17, 24];
+    var delays = [-2, -7, -11, -15, -4, -19];
+    var sizes = [12, 16, 20, 14];
+    lefts.forEach(function (left, i) {
+      var s = sizes[i % sizes.length];
+      var leaf = el('span', 'leaf');
+      leaf.style.left = left + '%';
+      leaf.style.animationDuration = durs[i % durs.length] + 's';
+      leaf.style.animationDelay = delays[i % delays.length] + 's';
+      leaf.innerHTML = '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c4.5 1.4 7 5 7 9.2 0 5-3.2 9-7 10.8-3.8-1.8-7-5.8-7-10.8C5 7 7.5 3.4 12 2Z"/></svg>';
+      leafBox.appendChild(leaf);
+    });
+  }
+
+  // ---------- Traits + sticky media ----------
+  var traitsList = document.getElementById('traits');
+  var stickyMedia = document.getElementById('stickyMedia');
+  traits.forEach(function (t, i) {
+    var li = el('li', 'trait' + (i === 0 ? ' active' : ''));
+    li.innerHTML =
+      frame(t.img, t.alt, 'r-32') +
+      '<div style="display:flex; align-items:baseline; gap:1.25rem; margin-top:2rem;">' +
+        '<span class="trait-no">' + t.n + '</span>' +
+        '<span style="height:1px; flex:1; background:rgb(243 237 227 / 0.2);"></span>' +
+      '</div>' +
+      '<h3>' + t.t + '</h3>' +
+      '<p class="trait-lede">' + t.l + '</p>' +
+      '<p class="body">' + t.b + '</p>';
+    traitsList.appendChild(li);
+
+    var f = el('div', 'frame r-45' + (i === 0 ? ' show' : ''));
+    f.innerHTML = '<img src="' + t.img + '" alt="' + t.alt + '" loading="lazy" decoding="async">' +
+      '<span class="sticky-index"><span class="big">' + t.n + '</span>' +
+      '<span class="eyebrow" style="color:rgb(232 223 209 / 0.6);">05</span></span>';
+    stickyMedia.appendChild(f);
+  });
+
+  if ('IntersectionObserver' in window) {
+    var traitNodes = traitsList.querySelectorAll('.trait');
+    var mediaNodes = stickyMedia.querySelectorAll('.frame');
+    var traitObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var idx = Array.prototype.indexOf.call(traitNodes, entry.target);
+        if (idx < 0) return;
+        for (var i = 0; i < traitNodes.length; i++) {
+          traitNodes[i].classList.toggle('active', i === idx);
+          if (mediaNodes[i]) mediaNodes[i].classList.toggle('show', i === idx);
+        }
+      });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    Array.prototype.forEach.call(traitNodes, function (n) { traitObserver.observe(n); });
+  }
+
+  // ---------- Plantation stages ----------
+  var track = document.getElementById('journeyTrack');
+  stages.forEach(function (s) {
+    var li = el('li', 'stage');
+    li.innerHTML =
+      frame(s.img, s.alt, 'r-45', 'zoom') +
+      '<div style="margin-top:1.75rem;">' +
+        '<div style="display:flex; align-items:baseline; gap:1rem;">' +
+          '<span class="stage-no">' + s.n + '</span>' +
+          '<span style="height:1px; flex:1; background:rgb(18 38 26 / 0.15);"></span>' +
+        '</div>' +
+        '<h3>' + s.t + '</h3>' +
+        '<p class="sum">' + s.s + '</p>' +
+        '<p class="detail">' + s.d + '</p>' +
+      '</div>';
+    track.appendChild(li);
+  });
+
+  // ---------- Pillars ----------
+  // One entry per pillar, each a list of path commands. Drawn rather than
+  // pulled from an icon font so the stroke weight matches the type, and
+  // written out in full because a clipped path renders as a squiggle.
+  var pillarIcons = [
+    // Soil health — strata
+    ['M12 3 2.5 8 12 13l9.5-5L12 3Z', 'M2.5 13 12 18l9.5-5', 'M2.5 17.5 12 22.5l9.5-5'],
+    // Water
+    ['M12 2.6c3.2 4.2 5.4 7.1 5.4 10a5.4 5.4 0 1 1-10.8 0c0-2.9 2.2-5.8 5.4-10Z'],
+    // Biodiversity — leaf with a vein
+    ['M20.5 3.5C11 3.5 4.5 8.5 4.5 17c0 1.2.2 2.3.6 3.3', 'M5.1 20.3C13 20 19.5 14 20.5 3.5Z', 'M6 19c2.5-4 6-6.8 10.5-8.5'],
+    // Sustainable forestry — conifer
+    ['M12 2.5 7.2 10h2.9l-3.6 6.2h4.6V22h1.8v-5.8h4.6L13.9 10h2.9L12 2.5Z'],
+    // Long-term cultivation — sprout
+    ['M12 22v-8.5', 'M12 13.5c0-4 2.9-6.4 7-6.4 0 4-2.9 6.4-7 6.4Z', 'M12 17.5c0-3.4-2.4-5.5-6-5.5 0 3.4 2.4 5.5 6 5.5Z'],
+    // Environmental responsibility — renewal. A three-arrow recycle mark does
+    // not survive a 26px box at this stroke weight; a cycle arrow does.
+    ['M20.5 12a8.5 8.5 0 1 1-2.5-6', 'M20.5 3v5.5H15']
+  ];
+  var pillarsList = document.getElementById('pillars');
+  pillars.forEach(function (p, i) {
+    var li = el('li', 'pillar rv');
+    var paths = pillarIcons[i].map(function (d) { return '<path d="' + d + '"/>'; }).join('');
+    li.innerHTML =
+      '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + paths + '</svg>' +
+      '<h3>' + p.t + '</h3>' +
+      '<p>' + p.b + '</p>';
+    pillarsList.appendChild(li);
+  });
+
+  // ---------- Why choose us ----------
+  var whyList = document.getElementById('whyList');
+  var whyMedia = document.getElementById('whyMedia');
+  advantages.forEach(function (a, i) {
+    var li = document.createElement('li');
+    var row = el('div', 'why-row' + (i === 0 ? ' active' : ''));
+    row.innerHTML =
+      '<button type="button">' +
+        '<span class="why-head"><span class="no">' + a.n + '</span><h3>' + a.t + '</h3></span>' +
+        frame(a.img, a.alt, 'r-32') +
+        '<p>' + a.b + '</p>' +
+      '</button>';
+    li.appendChild(row);
+    whyList.appendChild(li);
+
+    var f = el('div', 'frame r-34' + (i === 0 ? ' show' : ''));
+    f.innerHTML = '<img src="' + a.img + '" alt="' + a.alt + '" loading="lazy" decoding="async">';
+    whyMedia.appendChild(f);
+
+    function activate() {
+      var rows = whyList.querySelectorAll('.why-row');
+      var frames = whyMedia.querySelectorAll('.frame');
+      for (var k = 0; k < rows.length; k++) {
+        rows[k].classList.toggle('active', k === i);
+        if (frames[k]) frames[k].classList.toggle('show', k === i);
+      }
+    }
+    var btn = row.querySelector('button');
+    btn.addEventListener('mouseenter', activate);
+    btn.addEventListener('focus', activate);
+    btn.addEventListener('click', activate);
+  });
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  // ---------- Films ----------
+  var films = [
+    { id:'burma-teak-plant', t:'What Burma Teak Is', d:'An introduction to Burma teak at the nursery — what the plant is, and why growers ask for it by name.', dur:'2:13' },
+    { id:'teak-plantation',  t:'Inside A Teak Plantation', d:'Standing teak, canopy and undergrowth — what a plantation looks like once it has had time to become forest.', dur:'2:00' },
+    { id:'nursery-tour',     t:'Around The Nursery', d:'Through the beds at Gandarvakottai — how teak saplings are raised, graded and made ready to travel.', dur:'1:58' },
+    { id:'timber-and-time',  t:'Timber And Time', d:'Teak as finished timber, and the long horizon that produces it.', dur:'2:24' },
+    { id:'teak-saplings',    t:'The Saplings', d:'A close look at the planting stock itself — leaf, stem and root collar on a sapling ready for the field.', dur:'0:46' },
+    { id:'teak-in-use',      t:'Teak In Use', d:'From plantation to joinery — teak worked into the doors, gates and furniture it is grown for.', dur:'1:26' },
+    { id:'from-the-nursery', t:'From The Nursery', d:'The nursery at work — plants, people and the day-to-day of growing timber stock.', dur:'1:41' }
+  ];
+
+  var PLAY_SVG = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>';
+
+  var reelsList = document.getElementById('reels');
+  films.slice(0, 3).forEach(function (f, i) {
+    var li = el('li', 'reel rv');
+    li.innerHTML =
+      '<button type="button" data-film="' + i + '" aria-label="Play film: ' + f.t + '">' +
+        '<div class="frame">' +
+          '<img src="media/posters/' + f.id + '.jpg" alt="" loading="lazy" decoding="async">' +
+          '<span class="veil"></span>' +
+          '<span class="chip">' + f.dur + '</span>' +
+          '<span class="play"><i>' + PLAY_SVG + '</i></span>' +
+          '<span class="caption"><b>' + f.t + '</b><span>Tamil</span></span>' +
+        '</div>' +
+        '<p class="blurb">' + f.d + '</p>' +
+      '</button>';
+    reelsList.appendChild(li);
+  });
+
+  var reelPlayer = document.getElementById('reelPlayer');
+  var rpVideo = document.getElementById('rpVideo');
+  var rpTitle = document.getElementById('rpTitle');
+  var rpDesc = document.getElementById('rpDesc');
+  var rpCount = document.getElementById('rpCount');
+  var rpIndex = 0;
+  var rpLastFocus = null;
+
+  function showFilm(i) {
+    rpIndex = (i + films.length) % films.length;
+    var f = films[rpIndex];
+    rpVideo.pause();
+    rpVideo.setAttribute('poster', 'media/posters/' + f.id + '.jpg');
+    rpVideo.src = 'media/videos/' + f.id + '.mp4';
+    rpVideo.load();
+    rpTitle.textContent = f.t;
+    rpDesc.textContent = f.d;
+    rpCount.textContent = pad(rpIndex + 1) + ' / ' + pad(films.length);
+  }
+  function openFilm(i) {
+    rpLastFocus = document.activeElement;
+    showFilm(i);
+    reelPlayer.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('rpClose').focus();
+  }
+  function closeFilm() {
+    rpVideo.pause();
+    // Drop the source so the browser stops buffering a film nobody is watching.
+    rpVideo.removeAttribute('src');
+    rpVideo.load();
+    reelPlayer.classList.remove('open');
+    document.body.style.overflow = '';
+    if (rpLastFocus && rpLastFocus.focus) rpLastFocus.focus();
+  }
+
+  reelsList.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-film]');
+    if (btn) openFilm(parseInt(btn.getAttribute('data-film'), 10));
+  });
+  // The featured band opens the same player.
+  var featureBlock = document.getElementById('featureBlock');
+  if (featureBlock) {
+    featureBlock.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-film]');
+      if (btn) openFilm(parseInt(btn.getAttribute('data-film'), 10));
+    });
+  }
+  document.getElementById('rpClose').addEventListener('click', closeFilm);
+  document.getElementById('rpPrev').addEventListener('click', function () { showFilm(rpIndex - 1); });
+  document.getElementById('rpNext').addEventListener('click', function () { showFilm(rpIndex + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (!reelPlayer.classList.contains('open')) return;
+    if (e.key === 'Escape') closeFilm();
+    if (e.key === 'ArrowLeft') showFilm(rpIndex - 1);
+    if (e.key === 'ArrowRight') showFilm(rpIndex + 1);
+  });
+  var rpTouchX = null;
+  reelPlayer.addEventListener('touchstart', function (e) { rpTouchX = e.touches[0].clientX; }, { passive: true });
+  reelPlayer.addEventListener('touchend', function (e) {
+    if (rpTouchX === null) return;
+    var dx = e.changedTouches[0].clientX - rpTouchX;
+    rpTouchX = null;
+    if (Math.abs(dx) > 56) showFilm(rpIndex + (dx < 0 ? 1 : -1));
+  });
+
+  // ---------- Background video loops ----------
+  // The desktop encode is a landscape crop of the vertical source; phones get
+  // the portrait one, which fills their viewport natively. Chosen once, so a
+  // phone never downloads the wide file and then discards it.
+  function startBackgroundVideo(node, baseName, eager) {
+    if (!node || reduced) return;
+    var wide = window.matchMedia('(min-width: 1024px)').matches;
+    node.src = 'media/videos/' + baseName + (wide ? '-wide' : '-mobile') + '.mp4';
+    node.addEventListener('playing', function () { node.classList.add('playing'); });
+    // If autoplay is refused (low-power mode, data saver) the poster stays.
+    var attempt = node.play();
+    if (attempt && typeof attempt.catch === 'function') { attempt.catch(function () {}); }
+  }
+  startBackgroundVideo(document.getElementById('heroVideo'), 'hero', true);
+
+  // The pinned band only loads its loop once it is near the viewport.
+  var pinnedVideoEl = document.getElementById('pinnedVideo');
+  if (pinnedVideoEl && 'IntersectionObserver' in window) {
+    var pinObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        startBackgroundVideo(pinnedVideoEl, 'plantation-story', false);
+        pinObs.disconnect();
+      });
+    }, { rootMargin: '200px' });
+    pinObs.observe(pinnedVideoEl);
+  }
+
+  // ---------- Gallery ----------
+  var masonry = document.getElementById('masonry');
+  gallery.forEach(function (g, i) {
+    var li = document.createElement('li');
+    li.className = 'rv';
+    li.innerHTML =
+      '<button type="button" data-index="' + i + '" aria-label="Open image: ' + g.alt + '">' +
+        frame(g.src, g.alt, g.r, 'zoom') +
+        '<span class="cap">' + g.cap + '</span>' +
+      '</button>';
+    masonry.appendChild(li);
+  });
+
+  var lightbox = document.getElementById('lightbox');
+  var lbImage = document.getElementById('lbImage');
+  var lbCount = document.getElementById('lbCount');
+  var lbCaption = document.getElementById('lbCaption');
+  var lbIndex = 0;
+  var lastFocus = null;
+
+  function showImage(i) {
+    lbIndex = (i + gallery.length) % gallery.length;
+    var g = gallery[lbIndex];
+    lbImage.src = g.src;
+    lbImage.alt = g.alt;
+    // Carries no src until a gallery image is opened, so it starts hidden
+    // rather than sitting in the page as a sourceless <img>.
+    lbImage.hidden = false;
+    lbCaption.textContent = g.cap;
+    lbCount.textContent = pad(lbIndex + 1) + ' / ' + pad(gallery.length);
+  }
+  function openLightbox(i) {
+    lastFocus = document.activeElement;
+    showImage(i);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('lbClose').focus();
+  }
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  masonry.addEventListener('click', function (e) {
+    var btn = e.target.closest('button[data-index]');
+    if (btn) openLightbox(parseInt(btn.getAttribute('data-index'), 10));
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', function () { showImage(lbIndex - 1); });
+  document.getElementById('lbNext').addEventListener('click', function () { showImage(lbIndex + 1); });
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') showImage(lbIndex - 1);
+    if (e.key === 'ArrowRight') showImage(lbIndex + 1);
+  });
+  // Touch swipe
+  var touchX = null;
+  lightbox.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  lightbox.addEventListener('touchend', function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 56) showImage(lbIndex + (dx < 0 ? 1 : -1));
+  });
+
+  // ---------- Timeline ----------
+  var milestonesList = document.getElementById('milestones');
+  milestones.forEach(function (m, i) {
+    var li = el('li', 'milestone rv');
+    li.innerHTML =
+      '<span class="node"></span>' +
+      '<div class="split" style="gap:2rem;">' +
+        '<div class="col-7">' +
+          (m.y ? '<p class="year">' + m.y + '</p>' : '<p class="stage-lbl">Stage ' + pad(i + 1) + '</p>') +
+          '<h3>' + m.t + '</h3>' +
+          (m.b ? '<p>' + m.b + '</p>' : '') +
+        '</div>' +
+        '<div class="col-5">' + frame(m.img, m.alt, 'r-32', 'zoom') + '</div>' +
+      '</div>';
+    milestonesList.appendChild(li);
+  });
+
+  // ---------- Header state ----------
+  var header = document.getElementById('header');
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () {
+      header.classList.toggle('solid', window.scrollY > 60);
+      updateScrollEffects();
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ---------- Mobile menu ----------
+  var menuBtn = document.getElementById('menuBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', function () {
+    var open = mobileMenu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    header.classList.toggle('solid', open || window.scrollY > 60);
+    var links = mobileMenu.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) {
+      links[i].style.transitionDelay = open ? (0.2 + i * 0.07) + 's' : '0s';
+    }
+  });
+  mobileMenu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) {
+      mobileMenu.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // ---------- Scroll-driven effects ----------
+  var journeyWrap = document.getElementById('journeyWrap');
+  var journeyViewport = document.getElementById('journeyViewport');
+  var journeyTrackEl = document.getElementById('journeyTrack');
+  var journeyProgress = document.getElementById('journeyProgress');
+  var journeyHint = document.getElementById('journeyHint');
+  var spineFill = document.getElementById('spineFill');
+  var timeline = document.getElementById('timeline');
+  var sustMature = document.getElementById('sustMature');
+  var sustSection = document.getElementById('sustainability');
+  var pinnedMedia = document.getElementById('pinnedMedia');
+  var pinnedSection = document.querySelector('.pinned');
+
+  var horizontal = false;
+
+  function setupJourney() {
+    horizontal = window.innerWidth >= 1024 && !reduced;
+    if (horizontal) {
+      var overflow = journeyTrackEl.scrollWidth - journeyViewport.clientWidth;
+      journeyWrap.style.height = (overflow + window.innerHeight * 0.9) + 'px';
+      journeyViewport.style.position = 'sticky';
+      journeyViewport.style.top = '0';
+      journeyViewport.style.height = '100svh';
+      journeyViewport.style.display = 'flex';
+      journeyViewport.style.alignItems = 'center';
+      journeyTrackEl.style.transform = 'translateX(0)';
+      journeyHint.textContent = 'Scroll to follow the lifecycle';
+    } else {
+      journeyWrap.style.height = '';
+      journeyViewport.style.position = '';
+      journeyViewport.style.top = '';
+      journeyViewport.style.height = '';
+      journeyViewport.style.display = '';
+      journeyViewport.style.alignItems = '';
+      journeyViewport.style.overflowX = 'auto';
+      journeyTrackEl.style.transform = '';
+      journeyHint.textContent = 'Swipe to follow the lifecycle';
+    }
+  }
+
+  function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+  function updateScrollEffects() {
+    // Horizontal plantation track
+    if (horizontal && journeyWrap) {
+      var wrapRect = journeyWrap.getBoundingClientRect();
+      var total = journeyWrap.offsetHeight - window.innerHeight;
+      var p = clamp01(-wrapRect.top / (total || 1));
+      var overflow = journeyTrackEl.scrollWidth - journeyViewport.clientWidth;
+      journeyTrackEl.style.transform = 'translateX(' + (-overflow * p) + 'px)';
+      journeyProgress.style.transform = 'scaleX(' + p + ')';
+    }
+
+    // Timeline spine
+    if (timeline && spineFill) {
+      var tRect = timeline.getBoundingClientRect();
+      var tp = clamp01((window.innerHeight * 0.72 - tRect.top) / (tRect.height || 1));
+      spineFill.style.transform = 'scaleY(' + (reduced ? 1 : tp) + ')';
+    }
+
+    // Sustainability earth → lush crossfade
+    if (sustSection && sustMature) {
+      var sRect = sustSection.getBoundingClientRect();
+      var sp = clamp01((window.innerHeight - sRect.top) / (sRect.height + window.innerHeight));
+      sustMature.style.opacity = String(clamp01((sp - 0.25) / 0.4));
+    }
+
+    // Pinned video scale
+    if (pinnedSection && pinnedMedia && !reduced) {
+      var pRect = pinnedSection.getBoundingClientRect();
+      var pp = clamp01(-pRect.top / ((pinnedSection.offsetHeight - window.innerHeight) || 1));
+      pinnedMedia.style.transform = 'scale(' + (1.14 - 0.14 * pp) + ')';
+    }
+  }
+
+  // ---------- Reveals ----------
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.rv'), function (n) { revealObserver.observe(n); });
+
+    var maskObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var masks = entry.target.querySelectorAll('.line-mask');
+        Array.prototype.forEach.call(masks, function (m, i) {
+          setTimeout(function () { m.classList.add('in'); }, i * 120);
+        });
+        maskObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -12% 0px' });
+
+    Array.prototype.forEach.call(document.querySelectorAll('h1, h2, p.d-lg'), function (n) {
+      if (n.querySelector('.line-mask')) maskObserver.observe(n);
+    });
+
+    // Counters
+    var countObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var node = entry.target;
+        var target = parseInt(node.getAttribute('data-count'), 10);
+        countObserver.unobserve(node);
+        if (reduced) { node.textContent = String(target); return; }
+        var start = performance.now();
+        (function step(now) {
+          var t = clamp01((now - start) / 1800);
+          var eased = 1 - Math.pow(1 - t, 3);
+          node.textContent = String(Math.round(target * eased));
+          if (t < 1) requestAnimationFrame(step);
+        })(start);
+      });
+    }, { rootMargin: '0px 0px -20% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-count]'), function (n) { countObserver.observe(n); });
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll('.rv'), function (n) { n.classList.add('in'); });
+    Array.prototype.forEach.call(document.querySelectorAll('.line-mask'), function (n) { n.classList.add('in'); });
+  }
+
+  // Hero headline plays on load rather than on scroll
+  window.setTimeout(function () {
+    var masks = document.getElementById('heroHeading').querySelectorAll('.line-mask');
+    Array.prototype.forEach.call(masks, function (m, i) {
+      setTimeout(function () { m.classList.add('in'); }, 350 + i * 130);
+    });
+    var heroRv = document.querySelectorAll('.hero .rv');
+    Array.prototype.forEach.call(heroRv, function (n, i) {
+      setTimeout(function () { n.classList.add('in'); }, 700 + i * 140);
+    });
+  }, 60);
+
+  setupJourney();
+  updateScrollEffects();
+  window.addEventListener('resize', function () { setupJourney(); updateScrollEffects(); });
+  window.addEventListener('load', function () { setupJourney(); updateScrollEffects(); });
+})();
+</script>

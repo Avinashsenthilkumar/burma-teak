@@ -1,0 +1,307 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===========================================================================
+   Burma Teak Plant — global stylesheet
+   All styling lives in Tailwind classes or in the component layer below.
+   No inline style attributes are used for presentation anywhere in the app;
+   the only runtime-set properties are motion values and CSS custom properties
+   that genuinely depend on measured layout.
+   =========================================================================== */
+
+@layer base {
+  :root {
+    --header-height: 5rem;
+    --cursor-size: 14px;
+    /* Set by the scroll progress bar. */
+    --scroll-progress: 0;
+  }
+
+  * {
+    @apply border-0;
+  }
+
+  html {
+    @apply antialiased;
+    /* Lenis drives scrolling; native smooth-scroll would fight it. */
+    scroll-behavior: auto;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Lenis */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    @apply bg-paper text-forest-deep font-sans;
+    /* Guards every section against accidental horizontal overflow. */
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-normal;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-forest-deep;
+  }
+
+  /* Visible, on-brand focus ring — never removed, only restyled. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-paper rounded-sm;
+  }
+
+  .on-dark :focus-visible {
+    @apply ring-gold-soft ring-offset-forest-deep;
+  }
+
+  /* Hide the native cursor only where the custom one is actually active. */
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none;
+  }
+}
+
+@layer components {
+  /* --- Layout ----------------------------------------------------------- */
+  .shell {
+    @apply mx-auto w-full max-w-shell px-gutter;
+  }
+
+  .section {
+    @apply py-section;
+  }
+
+  /* --- Typography ------------------------------------------------------- */
+  .eyebrow {
+    @apply font-sans text-eyebrow font-medium uppercase tracking-eyebrow;
+  }
+
+  .lede {
+    @apply font-sans text-body-lg text-forest-mid/85;
+  }
+
+  .on-dark .lede {
+    @apply text-sand/80;
+  }
+
+  /* Per-line wrapper for headline reveals. */
+  .line-mask {
+    @apply block overflow-hidden;
+    /* Descenders need room or the mask clips them. */
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  /* --- Buttons ---------------------------------------------------------- */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2.5 whitespace-nowrap
+           font-sans text-[0.8125rem] font-medium uppercase tracking-wider2
+           transition-colors duration-500 ease-cinematic;
+    padding: 1.05rem 2rem;
+  }
+
+  .btn-primary {
+    @apply bg-forest text-bone hover:bg-forest-deep;
+  }
+
+  .btn-gold {
+    @apply bg-gold text-forest-deep hover:bg-gold-soft;
+  }
+
+  .btn-outline {
+    @apply border border-forest/30 text-forest hover:border-forest hover:bg-forest hover:text-bone;
+  }
+
+  .btn-ghost-light {
+    @apply border border-bone/40 text-bone hover:border-bone hover:bg-bone hover:text-forest-deep;
+  }
+
+  /* Arrow nudge shared by every button that carries one. */
+  .btn .btn-arrow {
+    @apply transition-transform duration-500 ease-cinematic;
+  }
+  .btn:hover .btn-arrow {
+    @apply translate-x-1;
+  }
+
+  /* --- Links ------------------------------------------------------------ */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-px w-full origin-right scale-x-0 bg-current
+           transition-transform duration-500 ease-cinematic;
+  }
+  .link-underline:hover::after,
+  .link-underline[data-active='true']::after {
+    @apply origin-left scale-x-100;
+  }
+
+  /* --- Rules & dividers ------------------------------------------------- */
+  .hairline {
+    @apply h-px w-full bg-forest/12;
+  }
+  .on-dark .hairline {
+    @apply bg-bone/15;
+  }
+
+  /* --- Media ------------------------------------------------------------ */
+  .media-frame {
+    @apply relative overflow-hidden bg-forest-deep;
+  }
+
+  .media-zoom img {
+    @apply transition-transform duration-[1200ms] ease-cinematic;
+  }
+  .media-zoom:hover img {
+    @apply scale-[1.045];
+  }
+
+  /* Neutral placeholder shown while an image loads or when one is absent.
+     Never reads as an error — it reads as an empty frame. */
+  .media-placeholder {
+    @apply absolute inset-0 bg-forest-deep;
+    background-image: linear-gradient(
+      115deg,
+      theme('colors.forest.deep') 0%,
+      theme('colors.forest.DEFAULT') 42%,
+      theme('colors.forest.mid') 100%
+    );
+  }
+
+  .media-placeholder-shimmer::after {
+    content: '';
+    @apply absolute inset-0;
+    background-image: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(232 223 209 / 0.07) 45%,
+      transparent 70%
+    );
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+
+  /* --- Dark sections ---------------------------------------------------- */
+  .on-dark {
+    @apply bg-forest-deep text-bone;
+  }
+
+  /* --- Form fields ------------------------------------------------------ */
+  .field-label {
+    @apply eyebrow mb-3 block text-forest-mid/70;
+  }
+  .on-dark .field-label {
+    @apply text-sand/60;
+  }
+
+  .field-input {
+    @apply w-full border-b border-forest/20 bg-transparent pb-3 pt-1
+           font-sans text-base text-forest-deep placeholder:text-forest/35
+           transition-colors duration-300 focus:border-gold focus:outline-none;
+    border-radius: 0;
+  }
+
+  .on-dark .field-input {
+    @apply border-bone/25 text-bone placeholder:text-sand/40 focus:border-gold;
+  }
+
+  .field-input[aria-invalid='true'] {
+    @apply border-teak;
+  }
+
+  .field-error {
+    @apply mt-2 font-sans text-xs text-teak-dark;
+  }
+  .on-dark .field-error {
+    @apply text-teak-light;
+  }
+
+  /* --- Utility ---------------------------------------------------------- */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .skip-link {
+    @apply fixed left-4 top-4 z-[200] -translate-y-24 bg-forest px-5 py-3
+           font-sans text-sm text-bone transition-transform duration-300
+           focus:translate-y-0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Grain overlay used on full-bleed media to kill banding. */
+  .grain::after {
+    content: '';
+    @apply pointer-events-none absolute inset-0 opacity-[0.045] mix-blend-overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Readability scrim for text over photography. */
+  .scrim-bottom::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0;
+    background-image: linear-gradient(
+      to top,
+      rgb(7 19 12 / 0.88) 0%,
+      rgb(7 19 12 / 0.45) 38%,
+      rgb(7 19 12 / 0.12) 70%,
+      transparent 100%
+    );
+  }
+
+  .scrim-full::before {
+    content: '';
+    @apply pointer-events-none absolute inset-0;
+    background-color: rgb(7 19 12 / 0.52);
+  }
+}
+
+/* ===========================================================================
+   Reduced motion.
+   Everything decorative stops. Nothing functional disappears — content that
+   animates in is simply present from the start.
+   =========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .media-zoom:hover img {
+    transform: none;
+  }
+}
