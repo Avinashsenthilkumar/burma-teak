@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { motion, useMotionValue } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useHasFinePointer, usePrefersReducedMotion } from '@/lib/hooks';
 
@@ -23,8 +23,10 @@ export function CustomCursor() {
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const ringX = useSpring(x, { stiffness: 320, damping: 32, mass: 0.5 });
-  const ringY = useSpring(y, { stiffness: 320, damping: 32, mass: 0.5 });
+  // The ring used to trail the pointer on a spring. A spring is a running
+  // animation, and binding one to `style` is what threw on mount in
+  // production, so the pointer values are bound directly and the trailing
+  // comes from a CSS transition on the wrapper below.
 
   const [label, setLabel] = useState<string | null>(null);
   const [interactive, setInteractive] = useState(false);
@@ -75,8 +77,8 @@ export function CustomCursor() {
   return (
     <motion.div
       aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 z-[140] hidden lg:block"
-      style={{ x: ringX, y: ringY }}
+      className="pointer-events-none fixed left-0 top-0 z-[140] hidden transition-transform duration-150 ease-out lg:block"
+      style={{ x, y }}
       animate={{ opacity: visible ? 1 : 0 }}
       transition={{ duration: 0.25 }}
     >

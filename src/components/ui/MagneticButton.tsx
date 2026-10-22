@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useRef, type ReactNode } from 'react';
 import { useHasFinePointer, usePrefersReducedMotion } from '@/lib/hooks';
 import { cn } from '@/lib/cn';
@@ -30,14 +30,16 @@ export function MagneticButton({
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springConfig = { stiffness: 180, damping: 18, mass: 0.6 };
-  const sx = useSpring(x, springConfig);
-  const sy = useSpring(y, springConfig);
+  // Bound directly rather than through useSpring. A spring is a live
+  // animation, so binding one to `style` makes framer-motion hand generated
+  // keyframes to the Web Animations API — the call that threw on mount in
+  // production. The spring's ease-out and settle are now a CSS transition on
+  // both layers, which also means the snap back to centre is still smooth.
 
   // Children drift slightly less than the wrapper — a small parallax that
   // makes the effect feel like depth rather than translation.
-  const innerX = useTransform(sx, (v) => v * 0.35);
-  const innerY = useTransform(sy, (v) => v * 0.35);
+  const innerX = useTransform(x, (v) => v * 0.35);
+  const innerY = useTransform(y, (v) => v * 0.35);
 
   const active = finePointer && !reduced;
 
@@ -61,12 +63,17 @@ export function MagneticButton({
   return (
     <motion.div
       ref={ref}
-      className={cn('inline-block', className)}
-      style={{ x: sx, y: sy }}
+      className={cn('inline-block transition-transform duration-300 ease-out', className)}
+      style={{ x, y }}
       onMouseMove={onMove}
       onMouseLeave={reset}
     >
-      <motion.div style={{ x: innerX, y: innerY }}>{children}</motion.div>
+      <motion.div
+        className="transition-transform duration-300 ease-out"
+        style={{ x: innerX, y: innerY }}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 }

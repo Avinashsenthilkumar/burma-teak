@@ -4,7 +4,6 @@ import {
   motion,
   useMotionValue,
   useScroll,
-  useSpring,
   useTransform,
   type MotionValue,
 } from 'framer-motion';
@@ -38,9 +37,13 @@ export function GrowthStory() {
   // Pointer drift
   const px = useMotionValue(0);
   const py = useMotionValue(0);
-  const spring = { stiffness: 90, damping: 24, mass: 0.7 };
-  const driftX = useSpring(px, spring);
-  const driftY = useSpring(py, spring);
+  // Bound directly rather than through useSpring. A spring is a live
+  // animation, so binding one to `style` makes framer-motion hand generated
+  // keyframes to the Web Animations API — the call that threw on mount in
+  // production. The easing these used to provide is now a CSS transition on
+  // the drifting layers below, which the compositor runs instead.
+  const driftX = px;
+  const driftY = py;
   const lightX = useTransform(driftX, (v) => v * -1.8);
   const lightY = useTransform(driftY, (v) => v * -1.8);
 
@@ -83,7 +86,7 @@ export function GrowthStory() {
         {/* Light bloom that answers the pointer */}
         <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_30%,rgba(201,162,39,0.16),transparent_70%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_50%_30%,rgba(201,162,39,0.16),transparent_70%)] transition-transform duration-500 ease-out"
           style={{ x: lightX, y: lightY }}
         />
 
@@ -153,7 +156,10 @@ function PhaseLayer({
 
   return (
     <motion.div className="absolute inset-0" style={{ opacity }}>
-      <motion.div className="absolute -inset-6" style={{ x: driftX, y: driftY, scale }}>
+      <motion.div
+        className="absolute -inset-6 transition-transform duration-500 ease-out"
+        style={{ x: driftX, y: driftY, scale }}
+      >
         <MediaImage
           src={phase.image}
           alt={phase.imageAlt}
