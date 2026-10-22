@@ -94,7 +94,7 @@ function PlaceholderMark() {
     <div className="absolute inset-0 grid place-items-center">
       <svg
         viewBox="0 0 48 48"
-        className="h-10 w-10 text-sand/18"
+        className="h-10 w-10 text-sand/20"
         fill="none"
         stroke="currentColor"
         strokeWidth="1"

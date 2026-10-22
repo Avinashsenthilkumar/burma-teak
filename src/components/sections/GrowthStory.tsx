@@ -93,7 +93,7 @@ export function GrowthStory() {
         <div className="shell relative flex h-full items-center">
           <div className="flex w-full items-stretch gap-10">
             {/* Growing stem */}
-            <div className="hidden w-px shrink-0 bg-bone/12 sm:block">
+            <div className="hidden w-px shrink-0 bg-bone/10 sm:block">
               <motion.div
                 className="h-full w-full origin-bottom bg-gold"
                 style={{ scaleY: stemScale }}

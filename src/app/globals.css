@@ -160,7 +160,7 @@
 
   /* --- Rules & dividers ------------------------------------------------- */
   .hairline {
-    @apply h-px w-full bg-forest/12;
+    @apply h-px w-full bg-forest/10;
   }
   .on-dark .hairline {
     @apply bg-bone/15;

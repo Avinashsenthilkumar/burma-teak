@@ -52,7 +52,7 @@ export function Journey() {
           {/* Spine */}
           <div
             aria-hidden="true"
-            className="absolute bottom-0 left-[3px] top-2 w-px bg-forest/12 sm:left-[7px]"
+            className="absolute bottom-0 left-[3px] top-2 w-px bg-forest/10 sm:left-[7px]"
           >
             <motion.div
               className="h-full w-full origin-top bg-teak"

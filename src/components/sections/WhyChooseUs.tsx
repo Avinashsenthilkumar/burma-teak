@@ -44,7 +44,7 @@ export function WhyChooseUs() {
           {/* Rows */}
           <ol className="lg:col-span-7">
             {advantages.map((item, i) => (
-              <li key={item.index} className="border-t border-forest/12 last:border-b">
+              <li key={item.index} className="border-t border-forest/10 last:border-b">
                 <button
                   type="button"
                   onMouseEnter={() => setActive(i)}

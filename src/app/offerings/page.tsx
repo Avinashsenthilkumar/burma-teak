@@ -86,7 +86,7 @@ export default function OfferingsPage() {
             not published until the client confirms the scope. Flip the flag and
             they appear here automatically.
           */}
-          <Reveal preset="fade-up" className="mt-24 grid items-center gap-10 border-t border-forest/12 pt-12 sm:grid-cols-5">
+          <Reveal preset="fade-up" className="mt-24 grid items-center gap-10 border-t border-forest/10 pt-12 sm:grid-cols-5">
             <MediaImage
               src={founder.nursery}
               alt={founder.nurseryAlt}

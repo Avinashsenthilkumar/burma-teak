@@ -93,7 +93,7 @@ export default function ContactPage() {
                 )}
               </ul>
 
-              <div className="mt-12 border-t border-forest/12 pt-8">
+              <div className="mt-12 border-t border-forest/10 pt-8">
                 <MediaImage
                   src={founder.portrait}
                   alt={founder.portraitAlt}
@@ -144,7 +144,7 @@ export default function ContactPage() {
               />
             </div>
           ) : (
-            <div className="flex flex-col items-start gap-5 border border-forest/12 bg-paper p-10 sm:p-14">
+            <div className="flex flex-col items-start gap-5 border border-forest/10 bg-paper p-10 sm:p-14">
               <MapPin className="h-7 w-7 text-teak" aria-hidden="true" strokeWidth={1.25} />
               <h2 className="font-display text-3xl text-forest-deep">
                 {companyConfig.address.city}, {companyConfig.address.state}

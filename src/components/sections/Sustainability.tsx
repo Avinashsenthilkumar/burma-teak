@@ -60,7 +60,7 @@ export function Sustainability() {
             />
           </motion.div>
         </motion.div>
-        <div aria-hidden="true" className="absolute inset-0 bg-ink/72" />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/70" />
       </div>
 
       <div className="shell py-section">

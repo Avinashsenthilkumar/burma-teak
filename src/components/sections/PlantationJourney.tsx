@@ -128,7 +128,7 @@ function HorizontalTrack() {
 
         {/* Track progress */}
         <div className="shell mt-14">
-          <div className="h-px w-full bg-forest/12">
+          <div className="h-px w-full bg-forest/10">
             <motion.div
               className="h-full origin-left bg-teak"
               style={{ scaleX: progress }}

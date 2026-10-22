@@ -103,7 +103,7 @@ export function Lightbox({ images, index, onClose, onIndexChange }: LightboxProp
           role="dialog"
           aria-modal="true"
           aria-label={`Image ${index + 1} of ${images.length}: ${image.alt}`}
-          className="fixed inset-0 z-[160] flex flex-col bg-ink/97 backdrop-blur-sm"
+          className="fixed inset-0 z-[160] flex flex-col bg-ink/95 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

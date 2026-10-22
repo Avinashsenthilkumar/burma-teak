@@ -130,7 +130,7 @@ function TraitBlock({
     <li
       ref={ref}
       className={cn(
-        'border-t border-bone/12 py-12 transition-opacity duration-700 ease-cinematic lg:py-16',
+        'border-t border-bone/10 py-12 transition-opacity duration-700 ease-cinematic lg:py-16',
         'lg:opacity-40',
         isActive && 'lg:opacity-100',
         index === total - 1 && 'border-b',

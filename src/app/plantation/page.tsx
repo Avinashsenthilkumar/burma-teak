@@ -81,7 +81,7 @@ export default function PlantationPage() {
           >
             {considerations.map((item, i) => (
               <RevealItem key={item.title}>
-                <div className="border-t border-forest/12 pt-7">
+                <div className="border-t border-forest/10 pt-7">
                   <span className="font-sans text-xs tabular-nums tracking-wider2 text-teak">
                     {String(i + 1).padStart(2, '0')}
                   </span>
