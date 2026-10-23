@@ -128,6 +128,23 @@ export function GrowthStory() {
   );
 }
 
+/**
+ * Keep a scroll-linked input range inside [0, 1].
+ *
+ * These ranges are deliberately overlapped — each phase starts fading before
+ * its slot and finishes after it — which pushes the first phase's lower bound
+ * below 0 and the last phase's upper bound above 1. As plain interpolation
+ * that is harmless. But framer-motion can hand a scroll-linked value to the
+ * Web Animations API, where the input range becomes keyframe `offset`s, and
+ * an offset outside [0, 1] is not a legal keyframe.
+ *
+ * Clamping costs nothing visually: the out-of-range stops sit in the flat
+ * head and tail of each curve, where the output value is already constant.
+ */
+function clampRange(stops: number[]): number[] {
+  return stops.map((n) => Math.min(1, Math.max(0, n)));
+}
+
 function PhaseLayer({
   phase,
   index,
@@ -149,7 +166,7 @@ function PhaseLayer({
   // Overlap the fades slightly so there is never a bare frame between phases.
   const opacity = useTransform(
     progress,
-    [start - span * 0.35, start + span * 0.18, end - span * 0.18, end + span * 0.35],
+    clampRange([start - span * 0.35, start + span * 0.18, end - span * 0.18, end + span * 0.35]),
     index === 0 ? [1, 1, 1, 0] : index === total - 1 ? [0, 1, 1, 1] : [0, 1, 1, 0],
   );
   const scale = useTransform(progress, [start, end], [1.1, 1.0]);
@@ -188,10 +205,10 @@ function PhaseLabel({
   const end = start + span;
   const opacity = useTransform(
     progress,
-    [start - span * 0.4, start + span * 0.2, end - span * 0.2, end + span * 0.4],
+    clampRange([start - span * 0.4, start + span * 0.2, end - span * 0.2, end + span * 0.4]),
     [0.28, 1, 1, 0.28],
   );
-  const x = useTransform(progress, [start - span * 0.4, start + span * 0.2], [-14, 0]);
+  const x = useTransform(progress, clampRange([start - span * 0.4, start + span * 0.2]), [-14, 0]);
 
   return (
     <motion.li style={{ opacity, x }} className="flex items-baseline gap-5">
